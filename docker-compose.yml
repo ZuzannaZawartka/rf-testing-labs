@@ -1,0 +1,23 @@
+services:
+  epc-simulator:
+    image: epc-simulator:1.0.0
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  robot-tests:
+    image: python:3.12-slim
+    depends_on:
+      epc-simulator:
+        condition: service_healthy
+    volumes:
+      - ./tests:/tests
+      - ./results:/results
+    working_dir: /tests
+    command: >
+      sh -c "pip install robotframework robotframework-requests -q &&
+             robot --outputdir /results epc_tests.robot"
