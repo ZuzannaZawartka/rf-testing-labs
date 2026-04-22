@@ -14,19 +14,19 @@ Reset Machine
     POST On Session    epc    /reset    expected_status=any
 
 Attach UE ${ue_id}
-    # Połączono funkcjonalności ACK dla Attach i Detach, ponieważ bez tego system traci stabilność
+    # zostaly polaczone dwa ack z attach i detach bo bez tego nie dziala
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${dane}=    Create Dictionary    ue_id=${ue_id_int}
     ${response}=    POST On Session    epc    /ues    json=${dane}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
 
 Detach UE ${ue_id}
-    # Połączono funkcjonalności ACK dla Attach i Detach, ponieważ bez tego system traci stabilność
+    # zostaly polaczone dwa ack z attach i detach bo bez tego nie dziala
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${response}=    DELETE On Session    epc    /ues/${ue_id_int}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
 
-Get Status Of UE ${ue_id}
+Retrieve Status Of UE ${ue_id}
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${response}=    GET On Session    epc    /ues/${ue_id_int}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
@@ -75,11 +75,11 @@ Response Should Be Successful
 Response Should Match Status ${expected_code}
     Should Be Equal As Integers    ${LAST_RESPONSE.status_code}    ${expected_code}
 
-Verify UE ${ue_id} Attached Successfully
+Verify UE ${ue_id} Is Attached Successfully
     Response Should Be Successful
     Should Be Equal    ${LAST_RESPONSE.json()}[status]    attached
 
-Verify UE ${ue_id} Detached Successfully
+Verify UE ${ue_id} Is Detached Successfully
     Response Should Be Successful
     Should Be Equal    ${LAST_RESPONSE.json()}[status]    detached
 
@@ -91,4 +91,5 @@ Verify Field ${field} Is Greater Than ${value}
 
 Verify Field ${field} Is Present
     Dictionary Should Contain Key    ${LAST_RESPONSE.json()}    ${field}
+
 
