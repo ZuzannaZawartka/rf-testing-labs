@@ -48,7 +48,7 @@ Start Traffic On UE ${ue_id} With Bearer ${bearer_id} At ${mbps} Mbps
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${bearer_id_int}=    Convert To Integer    ${bearer_id}
     ${mbps_int}=    Convert To Integer    ${mbps}
-    ${dane}=    Create Dictionary    protocol=tcp    Mbps=${mbps_int}
+    ${dane}=    Create Dictionary    protocol=udp    Mbps=${mbps_int}
     ${response}=    POST On Session    epc    /ues/${ue_id_int}/bearers/${bearer_id_int}/traffic    json=${dane}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
 
@@ -91,5 +91,48 @@ Verify Field ${field} Is Greater Than ${value}
 
 Verify Field ${field} Is Present
     Dictionary Should Contain Key    ${LAST_RESPONSE.json()}    ${field}
+
+Verify Traffic Throughput Is Approximately ${expected_mbps} Mbps
+    ${actual_bps}=    Set Variable    ${LAST_RESPONSE.json()}[target_bps]
+    ${expected_bps}=    Evaluate    ${expected_mbps} * 1000000
+    ${threshold}=    Evaluate    ${expected_bps} * 0.9
+    Should Be True    ${actual_bps} >= ${threshold}    Expected at least ${threshold} bps (90% of ${expected_mbps} Mbps), but got ${actual_bps} bps
+
+Verify Error Message Contains
+    [Arguments]    ${expected_text}
+    Should Not Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
+    ${response_json}=    Set Variable    ${LAST_RESPONSE.json()}
+    ${detail}=    Get From Dictionary    ${response_json}    detail
+    ${detail_str}=    Convert To String    ${detail}
+    Should Contain    ${detail_str}    ${expected_text}    ignore_case=True
+
+Verify Error Message For Duplicate UE Attachment
+    Verify Error Message Contains    already attached
+
+Verify Error Message For UE ID Out Of Range
+    [Documentation]    Dokumentacja: zakres 0-100.
+    Verify Message Contains Boundary    0    100
+
+Verify Error Message For Non-Existent UE
+    Verify Error Message Contains    not found
+
+Verify Error Message For Maximum Traffic Limit Exceeded
+    Verify Error Message Contains    exceeds maximum limit
+
+Verify Error Message For Inactive Bearer
+    Verify Error Message Contains    bearer not found
+
+Verify Error Message For Deleting Default Bearer
+    Verify Error Message Contains    cannot remove default bearer
+
+Verify Error Message For Bearer ID Out Of Range
+    [Documentation]    Dokumentacja: zakres 1-9.
+    Verify Message Contains Boundary    1    9
+
+Verify Message Contains Boundary
+    [Arguments]    ${lower}    ${upper}
+    ${detail}=    Convert To String    ${LAST_RESPONSE.json()}[detail]
+    Run Keyword If    '${lower}' in """${detail}""" or '${upper}' in """${detail}"""    Return From Keyword
+    Fail    Komunikat błędu nie odnosi się do granic zakresu ${lower}-${upper} określonego w dokumentacji (Otrzymano: ${detail})
 
 

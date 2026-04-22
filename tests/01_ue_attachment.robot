@@ -5,60 +5,57 @@ Suite Setup       Initialize Simulator Session
 Suite Teardown    Reset Machine
 Test Teardown     Reset Machine
 
-*** Variables ***
-${UE_ID}          1
-
 *** Test Cases ***
 
-TC-001: Attach UE Successfully
+TC-001 Attach UE 1 Successfully
     [Documentation]    Requirement: Verify successful UE attachment.
     [Tags]             positive    attach
-    Attach UE ${UE_ID}
-    Verify UE ${UE_ID} Is Attached Successfully
+    Attach UE 1
+    Verify UE 1 Is Attached Successfully
 
-TC-002: Reject UE ID Out Of Range
+TC-002 Reject UE ID 101 Out Of Range
     [Documentation]    Verify that UE ID 101 is rejected by the system.
     [Tags]             negative
     Attach UE 101
-    Response Should Match Status 422
+    Verify Error Message For UE ID Out Of Range
 
-TC-003: Reject Duplicate UE Attachment
+TC-003 Reject Duplicate UE 1 Attachment
     [Documentation]    Verify that attaching an already attached UE returns an error.
     [Tags]             negative
-    Attach UE ${UE_ID}
-    Attach UE ${UE_ID}
-    Response Should Match Status 400
+    Attach UE 1
+    Attach UE 1
+    Verify Error Message For Duplicate UE Attachment
 
-TC-004: Detach UE Successfully
+TC-004 Detach UE 1 Successfully
     [Documentation]    Verify successful removal of UE from network.
     [Tags]             positive    detach
-    Attach UE ${UE_ID}
-    Detach UE ${UE_ID}
-    Verify UE ${UE_ID} Is Detached Successfully
+    Attach UE 1
+    Detach UE 1
+    Verify UE 1 Is Detached Successfully
 
-TC-005: Reject Detach For Non-Existent UE
+TC-005 Reject Detach For Non-Existent UE 10
     [Documentation]    Verify error when detaching a UE that is not in the system.
     [Tags]             negative
     Detach UE 10
-    Response Should Match Status 400
+    Verify Error Message For Non-Existent UE
 
-TC-006: Verify Default Bearer 9 Creation
+TC-006 Verify Default Bearer 9 Creation For UE 1
     [Documentation]    Requirement: "Podłączony do sieci UE automatycznie otrzymuje domyślny bearer o ID 9".
     [Tags]             compliance    positive
-    Attach UE ${UE_ID}
-    Retrieve Status Of UE ${UE_ID}
+    Attach UE 1
+    Retrieve Status Of UE 1
     # Verify ID 9 is present in the bearer list (implicit in traffic stats test)
-    Retrieve Traffic Stats For UE ${UE_ID} On Bearer 9
+    Retrieve Traffic Stats For UE 1 On Bearer 9
     Response Should Be Successful
 
 # TC demonstrating defect DEF-002
-TC-007: Support UE ID Boundary 0
+TC-007 Support UE ID Boundary 0
     [Documentation]    Requirement: "zakres dostępnych UE: 0-100".
     [Tags]             compliance    boundary    bug-discovery
     Attach UE 0
     Verify UE 0 Is Attached Successfully
 
-TC-008: Support UE ID Boundary 100
+TC-008 Support UE ID Boundary 100
     [Documentation]    Requirement: "zakres dostępnych UE: 0-100".
     [Tags]             compliance    boundary
     Attach UE 100

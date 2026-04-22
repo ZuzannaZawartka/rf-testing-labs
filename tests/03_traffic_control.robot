@@ -5,58 +5,52 @@ Suite Setup       Initialize Simulator Session
 Suite Teardown    Reset Machine
 Test Teardown     Reset Machine
 
-*** Variables ***
-${UE_ID}          5
-${BEARER_ID}      9
-${SPEED_MBPS}     10
-
 *** Test Cases ***
 
-TC-015: Start Traffic Successfully
+TC-015 Start Traffic 10 Mbps Successfully For UE 5 On Bearer 9
     [Tags]       traffic    start    happy-path
-    [Setup]      Prepare UE ${UE_ID} With Bearer ${BEARER_ID}
-    Start Traffic On UE ${UE_ID} With Bearer ${BEARER_ID} At ${SPEED_MBPS} Mbps
+    [Setup]      Prepare UE 5 With Bearer 9
+    Start Traffic On UE 5 With Bearer 9 At 10 Mbps
     Response Should Be Successful
-    Verify Field target_bps Is Greater Than 0
+    Verify Traffic Throughput Is Approximately 10 Mbps
 
 
-TC-016: Stop Active Traffic Successfully
+TC-016 Stop Active Traffic Successfully For UE 5 On Bearer 9
     [Tags]       traffic    stop    happy-path
-    [Setup]      Prepare UE ${UE_ID} With Active Traffic ${BEARER_ID} At ${SPEED_MBPS} Mbps
-    Stop Traffic On UE ${UE_ID} With Bearer ${BEARER_ID}
+    [Setup]      Prepare UE 5 With Active Traffic 9 At 10 Mbps
+    Stop Traffic On UE 5 With Bearer 9
     Response Should Be Successful
 
 
-TC-017: Retrieve Traffic Stats Successfully
+TC-017 Retrieve Traffic Stats Successfully For UE 5 On Bearer 9
     [Tags]       traffic    stats    happy-path
-    [Setup]      Prepare UE ${UE_ID} With Active Traffic ${BEARER_ID} At ${SPEED_MBPS} Mbps
-    Retrieve Traffic Stats For UE ${UE_ID} On Bearer ${BEARER_ID}
+    [Setup]      Prepare UE 5 With Active Traffic 9 At 10 Mbps
+    Retrieve Traffic Stats For UE 5 On Bearer 9
     Response Should Be Successful
-    Verify Field protocol Contains tcp
-    Verify Field target_bps Is Greater Than 0
+    Verify Field protocol Contains udp
+    Verify Traffic Throughput Is Approximately 10 Mbps
     Verify Field tx_bps Is Present
     Verify Field rx_bps Is Present
 
 
 # TC demonstrating defect DEF-001
-TC-018: Enforce Maximum Transfer Limit
+TC-018 Enforce Maximum Transfer Limit Of 100 Mbps For UE 5 On Bearer 9
     [Documentation]    Requirement: "zakres transferu, max 100 Mbps".
     [Tags]             compliance    negative    bug-discovery
-    Prepare UE ${UE_ID} With Bearer ${BEARER_ID}
+    Prepare UE 5 With Bearer 9
     # 101 Mbps is above the documented limit of 100 Mbps
-    Start Traffic On UE ${UE_ID} With Bearer ${BEARER_ID} At 101 Mbps
-    Response Should Match Status 400
+    Start Traffic On UE 5 With Bearer 9 At 101 Mbps
+    Verify Error Message For Maximum Traffic Limit Exceeded
 
 
-TC-019: Prevent Traffic On Inactive Bearer
+TC-019 Prevent Traffic On Inactive Bearer 5 For UE 5
     [Documentation]    Requirement: "Jeśli bearer nie jest aktywny – zostanie wyświetlony błąd".
     [Tags]             compliance    negative
     Reset Machine
-    Attach UE ${UE_ID}
+    Attach UE 5
     # Bearer 5 is never created
-    Start Traffic On UE ${UE_ID} With Bearer 5 At ${SPEED_MBPS} Mbps
-    Response Should Match Status 400
-
+    Start Traffic On UE 5 With Bearer 5 At 10 Mbps
+    Verify Error Message For Inactive Bearer
 
 
 *** Keywords ***

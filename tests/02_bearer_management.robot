@@ -5,62 +5,57 @@ Suite Setup       Initialize Simulator Session
 Suite Teardown    Reset Machine
 Test Teardown     Reset Machine
 
-*** Variables ***
-${UE_ID}          5
-${BEARER_ID}      3
-
 *** Test Cases ***
 
-TC-009: Add Bearer To Attached UE
+TC-009 Add Bearer 3 To Attached UE 5
     [Documentation]    Verify successful bearer addition to attached UE.
     [Tags]             bearer    positive
-    Attach UE ${UE_ID}
-    Add Bearer ${BEARER_ID} To UE ${UE_ID}
+    Attach UE 5
+    Add Bearer 3 To UE 5
     Response Should Be Successful
 
 
-TC-010: Reject Bearer ID Out Of Range
-    [Documentation]    Verify that bearer ID out of range is rejected.
+TC-010 Reject Bearer ID 999 Out Of Range For UE 5
+    [Documentation]    Verify that bearer ID 999 out of range is rejected.
     [Tags]             bearer    negative
-    Attach UE ${UE_ID}
-    Add Bearer 999 To UE ${UE_ID}
-    Response Should Match Status 422
+    Attach UE 5
+    Add Bearer 999 To UE 5
+    Verify Error Message For Bearer ID Out Of Range
 
 
-TC-011: Reject Duplicate Bearer
+TC-011 Reject Duplicate Bearer 3 For UE 5
     [Documentation]    Verify that adding the same bearer twice returns an error.
     [Tags]             bearer    negative
-    Attach UE ${UE_ID}
-    Add Bearer ${BEARER_ID} To UE ${UE_ID}
-    Add Bearer ${BEARER_ID} To UE ${UE_ID}
-    Response Should Match Status 400
+    Attach UE 5
+    Add Bearer 3 To UE 5
+    Add Bearer 3 To UE 5
+    Verify Error Message Contains    already exists
 
 
-TC-012: Retrieve Bearers Of Attached UE
+TC-012 Retrieve Bearers Of Attached UE 5
     [Documentation]    Verify that bearers of attached UE can be retrieved.
     [Tags]             bearer    positive
-    Attach UE ${UE_ID}
-    Add Bearer ${BEARER_ID} To UE ${UE_ID}
-    Retrieve Status Of UE ${UE_ID}
+    Attach UE 5
+    Add Bearer 3 To UE 5
+    Retrieve Status Of UE 5
     Response Should Be Successful
 
 
-TC-013: Prevent Deletion Of Default Bearer
+TC-013 Prevent Deletion Of Default Bearer 9 For UE 5
     [Documentation]    Requirement: "Nie ma możliwości usunięcia domyślnego bearera".
     [Tags]             compliance    negative
-    Attach UE ${UE_ID}
-    Remove Bearer 9 From UE ${UE_ID}
-    # Should fail (400) according to documentation.
-    Response Should Match Status 400
+    Attach UE 5
+    Remove Bearer 9 From UE 5
+    Verify Error Message For Deleting Default Bearer
 
 
-TC-014: Reject Bearer ID Outside Range
+TC-014 Reject Bearer ID 10 Outside Range For UE 5
     [Documentation]    Requirement: "zakres bearerów dla UE: 1-9".
     [Tags]             compliance    negative
-    Attach UE ${UE_ID}
+    Attach UE 5
     # Bearer 10 is outside the documented range 1-9
-    Add Bearer 10 To UE ${UE_ID}
-    Response Should Match Status 422
+    Add Bearer 10 To UE 5
+    Verify Error Message For Bearer ID Out Of Range
 
 
 
