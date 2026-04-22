@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../resources/epc_keywords.resource
-Documentation     Traffic start and stop tests based on documentation.
+Documentation     Traffic start, stop and stats tests based on documentation.
 Suite Setup       Setup Simulator Session
 
 *** Variables ***
@@ -27,6 +27,19 @@ TC_02 Zatrzymanie aktywnego transferu zwraca 200 i poprawne dane
     Response Status Should Be                200
     Response Should Contain UE "${VALID_UE}" And Bearer "${VALID_BEARER}"
 
+TC_03 Statystyki aktywnego transferu zwracają 200 i poprawną odpowiedź
+    [Tags]       traffic    stats    happy-path    smoke
+    [Setup]      Full Setup With Active Traffic    ${VALID_UE}    ${VALID_BEARER}    ${SPEED_MBPS}
+    [Teardown]   Full Teardown With Bearer    ${VALID_UE}    ${VALID_BEARER}
+    Get Traffic Stats On Bearer "${VALID_BEARER}" Of UE "${VALID_UE}"
+    Response Status Should Be                200
+    Response Should Contain UE "${VALID_UE}" And Bearer "${VALID_BEARER}"
+    Response Field "protocol" Should Equal    tcp
+    Response Field "target_bps" Should Be Greater Than ${0}
+    Response Field "tx_bps" Should Be Present
+    Response Field "rx_bps" Should Be Present
+    Response Field "duration" Should Be Greater Or Equal ${0}
+
 *** Keywords ***
 
 # --- Environment setup/teardown ---
@@ -38,7 +51,7 @@ Full Setup With Bearer
     Add Bearer With ID "${bearer_id}" To UE "${ue_id}"
 
 Full Setup With Active Traffic
-    [Documentation]    Attach UE, add bearer and start traffic so stop can be tested
+    [Documentation]    Attach UE, add bearer and start traffic so stop/stats can be tested
     [Arguments]    ${ue_id}    ${bearer_id}    ${mbps}
     Attach Device With ID "${ue_id}" To Network
     Add Bearer With ID "${bearer_id}" To UE "${ue_id}"
