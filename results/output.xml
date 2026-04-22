@@ -1,1759 +1,1943 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.12.13 on linux)" generated="2026-04-22T13:56:16.226264" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.12.13 on linux)" generated="2026-04-22T16:34:37.363656" rpa="false" schemaversion="5">
 <suite id="s1" name="Tests" source="/tests">
 <kw name="Setup Simulator Session" owner="epc_keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.415540" level="INFO">Creating Session using : alias=epc, url=http://epc-simulator:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-04-22T16:34:37.462097" level="INFO">Creating Session using : alias=epc, url=http://epc-simulator:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>epc</arg>
 <arg>${BASE_URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-04-22T13:56:16.415184" elapsed="0.000750"/>
+<status status="PASS" start="2026-04-22T16:34:37.461964" elapsed="0.000278"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.414342" elapsed="0.001751"/>
+<status status="PASS" start="2026-04-22T16:34:37.461587" elapsed="0.000723"/>
 </kw>
 <suite id="s1-s1" name="02 Ue Attachment" source="/tests/02_ue_attachment.robot">
 <kw name="Reset Simulator" owner="epc_keywords" type="SETUP">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.484365" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.530089" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.484546" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.530187" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.429822" elapsed="0.054893"/>
+<status status="PASS" start="2026-04-22T16:34:37.463998" elapsed="0.066235"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.429256" elapsed="0.055559"/>
+<status status="PASS" start="2026-04-22T16:34:37.463891" elapsed="0.066406"/>
 </kw>
 <test id="s1-s1-t1" name="TC_001: Successful Attachment of UE" line="12">
 <kw name="Register device with ID &quot;1&quot;" source_name="Register device with ID &quot;${ue_id}&quot;">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.487298" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.531288" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.486811" elapsed="0.000520"/>
+<status status="PASS" start="2026-04-22T16:34:37.531090" elapsed="0.000211"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.488742" level="INFO">${dane} = {'ue_id': 1}</msg>
+<msg time="2026-04-22T16:34:37.531603" level="INFO">${dane} = {'ue_id': 1}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.487497" elapsed="0.001308"/>
+<status status="PASS" start="2026-04-22T16:34:37.531380" elapsed="0.000245"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.501848" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.542086" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 1}' 
  </msg>
-<msg time="2026-04-22T13:56:16.502020" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.542149" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":1} 
  </msg>
-<msg time="2026-04-22T13:56:16.502287" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.542227" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.489400" elapsed="0.012919"/>
+<status status="PASS" start="2026-04-22T16:34:37.531693" elapsed="0.010545"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.503879" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.542823" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.502617" elapsed="0.001329"/>
+<status status="PASS" start="2026-04-22T16:34:37.542344" elapsed="0.000506"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.486453" elapsed="0.017562"/>
+<status status="PASS" start="2026-04-22T16:34:37.530923" elapsed="0.011964"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.485633" elapsed="0.018430"/>
+<status status="PASS" start="2026-04-22T16:34:37.530685" elapsed="0.012221"/>
 </kw>
 <kw name="Device should be successfully attached">
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.507831" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.543474" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.505349" elapsed="0.002822"/>
+<status status="PASS" start="2026-04-22T16:34:37.543229" elapsed="0.000277"/>
 </kw>
 <arg>200</arg>
-<status status="PASS" start="2026-04-22T13:56:16.504633" elapsed="0.003783"/>
+<status status="PASS" start="2026-04-22T16:34:37.543114" elapsed="0.000422"/>
 </kw>
 <kw name="Response Should Contain Key With Value" owner="epc_keywords">
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${key}]</arg>
 <arg>${value}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.510366" elapsed="0.000999"/>
+<status status="PASS" start="2026-04-22T16:34:37.543733" elapsed="0.000266"/>
 </kw>
 <arg>status</arg>
 <arg>attached</arg>
-<status status="PASS" start="2026-04-22T13:56:16.508952" elapsed="0.002518"/>
+<status status="PASS" start="2026-04-22T16:34:37.543597" elapsed="0.000425"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.504266" elapsed="0.007255"/>
+<status status="PASS" start="2026-04-22T16:34:37.542983" elapsed="0.001055"/>
 </kw>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.529864" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.549588" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.530066" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.549649" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.512218" elapsed="0.018033"/>
+<status status="PASS" start="2026-04-22T16:34:37.544219" elapsed="0.005464"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.511775" elapsed="0.018657"/>
+<status status="PASS" start="2026-04-22T16:34:37.544120" elapsed="0.005605"/>
 </kw>
 <doc>Requirement: Verify successful UE attachment.</doc>
 <tag>attach</tag>
 <tag>positive</tag>
-<status status="PASS" start="2026-04-22T13:56:16.484888" elapsed="0.045627"/>
+<status status="PASS" start="2026-04-22T16:34:37.530345" elapsed="0.019405"/>
 </test>
 <test id="s1-s1-t2" name="TC_002: Rejection of UE ID Out Of Range" line="18">
 <kw name="Register device with ID &quot;101&quot;" source_name="Register device with ID &quot;${ue_id}&quot;">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.535465" level="INFO">${ue_id_int} = 101</msg>
+<msg time="2026-04-22T16:34:37.550590" level="INFO">${ue_id_int} = 101</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.534264" elapsed="0.001294"/>
+<status status="PASS" start="2026-04-22T16:34:37.550429" elapsed="0.000172"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.536872" level="INFO">${dane} = {'ue_id': 101}</msg>
+<msg time="2026-04-22T16:34:37.550934" level="INFO">${dane} = {'ue_id': 101}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.535836" elapsed="0.001123"/>
+<status status="PASS" start="2026-04-22T16:34:37.550672" elapsed="0.000273"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.545138" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.554207" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '14', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 101}' 
  </msg>
-<msg time="2026-04-22T13:56:16.546182" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.554502" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=422, reason=Unprocessable Entity 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '141', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '141', 'content-type': 'application/json'} 
  body={"detail":[{"type":"less_than_equal","loc":["body","ue_id"],"msg":"Input should be less than or equal to 100","input":101,"ctx":{"le":100}}]} 
  </msg>
-<msg time="2026-04-22T13:56:16.546472" level="INFO">${response} = &lt;Response [422]&gt;</msg>
+<msg time="2026-04-22T16:34:37.554567" level="INFO">${response} = &lt;Response [422]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.537541" elapsed="0.008977"/>
+<status status="PASS" start="2026-04-22T16:34:37.551013" elapsed="0.003565"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.548598" level="INFO">${LAST_RESPONSE} = &lt;Response [422]&gt;</msg>
+<msg time="2026-04-22T16:34:37.555070" level="INFO">${LAST_RESPONSE} = &lt;Response [422]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.546961" elapsed="0.001702"/>
+<status status="PASS" start="2026-04-22T16:34:37.554680" elapsed="0.000411"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.533393" elapsed="0.015450"/>
+<status status="PASS" start="2026-04-22T16:34:37.550307" elapsed="0.004821"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.532227" elapsed="0.016686"/>
+<status status="PASS" start="2026-04-22T16:34:37.550107" elapsed="0.005043"/>
 </kw>
 <kw name="Attempt should be rejected due to invalid input">
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.551593" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.555662" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.550262" elapsed="0.001471"/>
+<status status="PASS" start="2026-04-22T16:34:37.555417" elapsed="0.000269"/>
 </kw>
 <arg>422</arg>
-<status status="PASS" start="2026-04-22T13:56:16.549535" elapsed="0.002316"/>
+<status status="PASS" start="2026-04-22T16:34:37.555319" elapsed="0.000388"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.549064" elapsed="0.002918"/>
+<status status="PASS" start="2026-04-22T16:34:37.555215" elapsed="0.000507"/>
 </kw>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.559749" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.558569" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.559935" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.558599" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.553001" elapsed="0.007210"/>
+<status status="PASS" start="2026-04-22T16:34:37.555891" elapsed="0.002744"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.552437" elapsed="0.008480"/>
+<status status="PASS" start="2026-04-22T16:34:37.555794" elapsed="0.002874"/>
 </kw>
 <doc>Verify that UE ID 101 is rejected by the system.</doc>
 <tag>negative</tag>
-<status status="PASS" start="2026-04-22T13:56:16.531240" elapsed="0.029903"/>
+<status status="PASS" start="2026-04-22T16:34:37.549889" elapsed="0.008797"/>
 </test>
 <test id="s1-s1-t3" name="TC_003: Rejection of Duplicate Attachment" line="24">
 <kw name="Register device with ID &quot;1&quot;" source_name="Register device with ID &quot;${ue_id}&quot;">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.565610" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.559457" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.564831" elapsed="0.000826"/>
+<status status="PASS" start="2026-04-22T16:34:37.559317" elapsed="0.000150"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.566663" level="INFO">${dane} = {'ue_id': 1}</msg>
+<msg time="2026-04-22T16:34:37.559774" level="INFO">${dane} = {'ue_id': 1}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.565948" elapsed="0.000783"/>
+<status status="PASS" start="2026-04-22T16:34:37.559540" elapsed="0.000244"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.581090" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.565899" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 1}' 
  </msg>
-<msg time="2026-04-22T13:56:16.581243" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.565943" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":1} 
  </msg>
-<msg time="2026-04-22T13:56:16.581440" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.566017" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.567013" elapsed="0.014471"/>
+<status status="PASS" start="2026-04-22T16:34:37.559839" elapsed="0.006190"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.582790" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.566528" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.581836" elapsed="0.001006"/>
+<status status="PASS" start="2026-04-22T16:34:37.566139" elapsed="0.000410"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.564097" elapsed="0.018863"/>
+<status status="PASS" start="2026-04-22T16:34:37.559198" elapsed="0.007383"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.563064" elapsed="0.019946"/>
+<status status="PASS" start="2026-04-22T16:34:37.559006" elapsed="0.007592"/>
 </kw>
 <kw name="Register device with ID &quot;1&quot;" source_name="Register device with ID &quot;${ue_id}&quot;">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.584559" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.567095" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.584154" elapsed="0.000473"/>
+<status status="PASS" start="2026-04-22T16:34:37.566974" elapsed="0.000131"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.585231" level="INFO">${dane} = {'ue_id': 1}</msg>
+<msg time="2026-04-22T16:34:37.567281" level="INFO">${dane} = {'ue_id': 1}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.584802" elapsed="0.000483"/>
+<status status="PASS" start="2026-04-22T16:34:37.567160" elapsed="0.000130"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.590840" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.569429" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 1}' 
  </msg>
-<msg time="2026-04-22T13:56:16.590953" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.569458" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '32', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '32', 'content-type': 'application/json'} 
  body={"detail":"UE already attached"} 
  </msg>
-<msg time="2026-04-22T13:56:16.591195" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.569504" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.585486" elapsed="0.005754"/>
+<status status="PASS" start="2026-04-22T16:34:37.567339" elapsed="0.002175"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.591936" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.569759" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.591499" elapsed="0.000483"/>
+<status status="PASS" start="2026-04-22T16:34:37.569594" elapsed="0.000181"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.583686" elapsed="0.008361"/>
+<status status="PASS" start="2026-04-22T16:34:37.566858" elapsed="0.002943"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.583178" elapsed="0.009255"/>
+<status status="PASS" start="2026-04-22T16:34:37.566682" elapsed="0.003409"/>
 </kw>
 <kw name="Attempt should be rejected due to device already attached">
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.593816" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.570602" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.593154" elapsed="0.000844"/>
+<status status="PASS" start="2026-04-22T16:34:37.570367" elapsed="0.000275"/>
 </kw>
 <arg>400</arg>
-<status status="PASS" start="2026-04-22T13:56:16.592892" elapsed="0.001228"/>
+<status status="PASS" start="2026-04-22T16:34:37.570268" elapsed="0.000398"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.592582" elapsed="0.001636"/>
+<status status="PASS" start="2026-04-22T16:34:37.570155" elapsed="0.000529"/>
 </kw>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.606897" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.586171" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.607020" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.586225" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.595511" elapsed="0.011583"/>
+<status status="PASS" start="2026-04-22T16:34:37.570873" elapsed="0.015387"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.594684" elapsed="0.012495"/>
+<status status="PASS" start="2026-04-22T16:34:37.570770" elapsed="0.015541"/>
 </kw>
 <doc>Verify that attaching an already attached UE returns an error.</doc>
 <tag>negative</tag>
-<status status="PASS" start="2026-04-22T13:56:16.561801" elapsed="0.045421"/>
+<status status="PASS" start="2026-04-22T16:34:37.558793" elapsed="0.027542"/>
 </test>
 <test id="s1-s1-t4" name="TC_004: Successful UE Detachment" line="31">
 <kw name="Register device with ID &quot;1&quot;" source_name="Register device with ID &quot;${ue_id}&quot;">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.610657" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.587387" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.610259" elapsed="0.000432"/>
+<status status="PASS" start="2026-04-22T16:34:37.587225" elapsed="0.000173"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.611427" level="INFO">${dane} = {'ue_id': 1}</msg>
+<msg time="2026-04-22T16:34:37.587591" level="INFO">${dane} = {'ue_id': 1}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.610907" elapsed="0.000595"/>
+<status status="PASS" start="2026-04-22T16:34:37.587461" elapsed="0.000139"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.625036" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.591441" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 1}' 
  </msg>
-<msg time="2026-04-22T13:56:16.625121" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.591469" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":1} 
  </msg>
-<msg time="2026-04-22T13:56:16.625288" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.591519" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.611878" elapsed="0.013445"/>
+<status status="PASS" start="2026-04-22T16:34:37.587670" elapsed="0.003859"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.626457" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.591957" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.625588" elapsed="0.000969"/>
+<status status="PASS" start="2026-04-22T16:34:37.591614" elapsed="0.000359"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.609698" elapsed="0.016934"/>
+<status status="PASS" start="2026-04-22T16:34:37.587100" elapsed="0.004898"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.608477" elapsed="0.018202"/>
+<status status="PASS" start="2026-04-22T16:34:37.586738" elapsed="0.005276"/>
 </kw>
 <kw name="Disconnect device with ID &quot;1&quot;" source_name="Disconnect device with ID &quot;${ue_id}&quot;">
 <kw name="Detach Device With ID &quot;${ue_id}&quot; From Network" owner="epc_keywords" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.627966" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.592428" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.627605" elapsed="0.000388"/>
+<status status="PASS" start="2026-04-22T16:34:37.592327" elapsed="0.000109"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.640160" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/1 
+<msg time="2026-04-22T16:34:37.596379" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/1 
  path_url=/ues/1 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.640245" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/1 
+<msg time="2026-04-22T16:34:37.596415" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/1 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"detached","ue_id":1} 
  </msg>
-<msg time="2026-04-22T13:56:16.640373" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.596469" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.628130" elapsed="0.012271"/>
+<status status="PASS" start="2026-04-22T16:34:37.592484" elapsed="0.003995"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.641152" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.596748" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.640704" elapsed="0.000495"/>
+<status status="PASS" start="2026-04-22T16:34:37.596565" elapsed="0.000199"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.627316" elapsed="0.013949"/>
+<status status="PASS" start="2026-04-22T16:34:37.592225" elapsed="0.004565"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.626829" elapsed="0.014482"/>
+<status status="PASS" start="2026-04-22T16:34:37.592071" elapsed="0.004734"/>
 </kw>
 <kw name="Device should be successfully detached">
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.642695" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.597346" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.642070" elapsed="0.000687"/>
+<status status="PASS" start="2026-04-22T16:34:37.597094" elapsed="0.000279"/>
 </kw>
 <arg>200</arg>
-<status status="PASS" start="2026-04-22T13:56:16.641797" elapsed="0.001060"/>
+<status status="PASS" start="2026-04-22T16:34:37.596984" elapsed="0.000413"/>
 </kw>
 <kw name="Response Should Contain Key With Value" owner="epc_keywords">
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${key}]</arg>
 <arg>${value}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.643279" elapsed="0.000647"/>
+<status status="PASS" start="2026-04-22T16:34:37.597555" elapsed="0.000315"/>
 </kw>
 <arg>status</arg>
 <arg>detached</arg>
-<status status="PASS" start="2026-04-22T13:56:16.643001" elapsed="0.001033"/>
+<status status="PASS" start="2026-04-22T16:34:37.597451" elapsed="0.000466"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.641443" elapsed="0.002642"/>
+<status status="PASS" start="2026-04-22T16:34:37.596868" elapsed="0.001079"/>
 </kw>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.651393" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.599685" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.651997" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.599815" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.644784" elapsed="0.007335"/>
+<status status="PASS" start="2026-04-22T16:34:37.598164" elapsed="0.001674"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.644307" elapsed="0.007937"/>
+<status status="PASS" start="2026-04-22T16:34:37.598041" elapsed="0.001822"/>
 </kw>
 <doc>Verify successful removal of UE from network.</doc>
 <tag>detach</tag>
 <tag>positive</tag>
-<status status="PASS" start="2026-04-22T13:56:16.607598" elapsed="0.044730"/>
+<status status="PASS" start="2026-04-22T16:34:37.586487" elapsed="0.013392"/>
 </test>
 <test id="s1-s1-t5" name="TC_005: Detach Not Attached UE" line="38">
 <kw name="Disconnect device with ID &quot;1&quot;" source_name="Disconnect device with ID &quot;${ue_id}&quot;">
 <kw name="Detach Device With ID &quot;${ue_id}&quot; From Network" owner="epc_keywords" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.656419" level="INFO">${ue_id_int} = 1</msg>
+<msg time="2026-04-22T16:34:37.600496" level="INFO">${ue_id_int} = 1</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.655691" elapsed="0.000781"/>
+<status status="PASS" start="2026-04-22T16:34:37.600391" elapsed="0.000113"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.661442" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/1 
+<msg time="2026-04-22T16:34:37.601702" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/1 
  path_url=/ues/1 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.661526" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/1 
+<msg time="2026-04-22T16:34:37.601723" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/1 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '25', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '25', 'content-type': 'application/json'} 
  body={"detail":"UE not found"} 
  </msg>
-<msg time="2026-04-22T13:56:16.661784" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.601761" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.656813" elapsed="0.005018"/>
+<status status="PASS" start="2026-04-22T16:34:37.600550" elapsed="0.001219"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.663186" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.602106" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.662168" elapsed="0.001068"/>
+<status status="PASS" start="2026-04-22T16:34:37.601829" elapsed="0.000291"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.655085" elapsed="0.008220"/>
+<status status="PASS" start="2026-04-22T16:34:37.600293" elapsed="0.001847"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.654149" elapsed="0.009203"/>
+<status status="PASS" start="2026-04-22T16:34:37.600144" elapsed="0.002009"/>
 </kw>
 <kw name="Attempt should be rejected due to device not found">
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.665551" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.602647" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.664055" elapsed="0.001685"/>
+<status status="PASS" start="2026-04-22T16:34:37.602351" elapsed="0.000319"/>
 </kw>
 <arg>400</arg>
-<status status="PASS" start="2026-04-22T13:56:16.663795" elapsed="0.002321"/>
+<status status="PASS" start="2026-04-22T16:34:37.602268" elapsed="0.000424"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.663477" elapsed="0.002795"/>
+<status status="PASS" start="2026-04-22T16:34:37.602190" elapsed="0.000517"/>
 </kw>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.674014" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.603984" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.674091" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.604010" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.669795" elapsed="0.004364"/>
+<status status="PASS" start="2026-04-22T16:34:37.602862" elapsed="0.001171"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.668160" elapsed="0.006084"/>
+<status status="PASS" start="2026-04-22T16:34:37.602771" elapsed="0.001290"/>
 </kw>
 <doc>Verify error when detaching a UE that is not in the system.</doc>
 <tag>negative</tag>
-<status status="PASS" start="2026-04-22T13:56:16.652828" elapsed="0.021506"/>
+<status status="PASS" start="2026-04-22T16:34:37.599971" elapsed="0.004105"/>
 </test>
 <doc>UE Attachment and Detachment tests based on documentation.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.416207" elapsed="0.258808"/>
+<status status="PASS" start="2026-04-22T16:34:37.462355" elapsed="0.141932"/>
 </suite>
-<suite id="s1-s2" name="Traffic Tests" source="/tests/traffic_tests.robot">
+<suite id="s1-s2" name="Bearer Tests" source="/tests/bearer_tests.robot">
 <kw name="Setup Simulator Session" owner="epc_keywords" type="SETUP">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.690649" level="INFO">Creating Session using : alias=epc, url=http://epc-simulator:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg time="2026-04-22T16:34:37.605743" level="INFO">Creating Session using : alias=epc, url=http://epc-simulator:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
 <arg>epc</arg>
 <arg>${BASE_URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-04-22T13:56:16.690317" elapsed="0.000613"/>
+<status status="PASS" start="2026-04-22T16:34:37.605694" elapsed="0.000112"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.689916" elapsed="0.001124"/>
+<status status="PASS" start="2026-04-22T16:34:37.605596" elapsed="0.000232"/>
 </kw>
-<test id="s1-s2-t1" name="TC_01 Rozpoczęcie transferu z prawidłową prędkością zwraca 200 i poprawne dane" line="13">
-<kw name="Full Setup With Bearer" type="SETUP">
-<kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
+<test id="s1-s2-t1" name="TC_01 Add Bearer To Attached UE" line="13">
+<kw name="Attach Device With ID &quot;${VALID_UE}&quot; To Network" owner="epc_keywords" type="SETUP" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.694327" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.606291" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.693715" elapsed="0.000648"/>
+<status status="PASS" start="2026-04-22T16:34:37.606168" elapsed="0.000131"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.695230" level="INFO">${dane} = {'ue_id': 5}</msg>
+<msg time="2026-04-22T16:34:37.606454" level="INFO">${dane} = {'ue_id': 5}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.694634" elapsed="0.000625"/>
+<status status="PASS" start="2026-04-22T16:34:37.606345" elapsed="0.000117"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.711204" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.609570" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 5}' 
  </msg>
-<msg time="2026-04-22T13:56:16.711311" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.609592" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:16.711573" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.609644" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.695451" elapsed="0.016177"/>
+<status status="PASS" start="2026-04-22T16:34:37.606509" elapsed="0.003144"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.713269" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.610046" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.711958" elapsed="0.001401"/>
+<status status="PASS" start="2026-04-22T16:34:37.609723" elapsed="0.000340"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.693199" elapsed="0.020278"/>
+<status status="PASS" start="2026-04-22T16:34:37.606065" elapsed="0.004021"/>
 </kw>
-<kw name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;">
+<kw name="Add Bearer With ID &quot;${VALID_BEARER}&quot; To UE &quot;${VALID_UE}&quot;" owner="epc_keywords" source_name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.715696" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.610594" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.715097" elapsed="0.000633"/>
+<status status="PASS" start="2026-04-22T16:34:37.610482" elapsed="0.000134"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.716529" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.610788" level="INFO">${bearer_id_int} = 3</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.716014" elapsed="0.000602"/>
+<status status="PASS" start="2026-04-22T16:34:37.610680" elapsed="0.000117"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.717453" level="INFO">${dane} = {'bearer_id': 9}</msg>
+<msg time="2026-04-22T16:34:37.610975" level="INFO">${dane} = {'bearer_id': 3}</msg>
 <var>${dane}</var>
 <arg>bearer_id=${bearer_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.716838" elapsed="0.000669"/>
+<status status="PASS" start="2026-04-22T16:34:37.610849" elapsed="0.000134"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.725272" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
+<msg time="2026-04-22T16:34:37.615786" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
  path_url=/ues/5/bearers 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '16', 'Content-Type': 'application/json'} 
- body=b'{"bearer_id": 9}' 
+ body=b'{"bearer_id": 3}' 
  </msg>
-<msg time="2026-04-22T13:56:16.725353" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
- status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
- body={"detail":"Bearer already exists"} 
+<msg time="2026-04-22T16:34:37.615807" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '49', 'content-type': 'application/json'} 
+ body={"status":"bearer_added","ue_id":5,"bearer_id":3} 
  </msg>
-<msg time="2026-04-22T13:56:16.725515" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.615842" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.717868" elapsed="0.007695"/>
+<status status="PASS" start="2026-04-22T16:34:37.611029" elapsed="0.004822"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.726742" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.616023" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.725980" elapsed="0.000845"/>
+<status status="PASS" start="2026-04-22T16:34:37.615914" elapsed="0.000122"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.714514" elapsed="0.012466"/>
+<status status="PASS" start="2026-04-22T16:34:37.610216" elapsed="0.005840"/>
+</kw>
+<kw name="Response Status Should Be" owner="epc_keywords">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.617079" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${LAST_RESPONSE.status_code}</arg>
+<arg>${expected_code}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.616197" elapsed="0.000909"/>
+</kw>
+<arg>200</arg>
+<status status="PASS" start="2026-04-22T16:34:37.616101" elapsed="0.001030"/>
+</kw>
+<kw name="Detach Device With ID &quot;${VALID_UE}&quot; From Network" owner="epc_keywords" type="TEARDOWN" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.617483" level="INFO">${ue_id_int} = 5</msg>
+<var>${ue_id_int}</var>
+<arg>${ue_id}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.617388" elapsed="0.000105"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2026-04-22T16:34:37.619920" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
+ path_url=/ues/5 
+ headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-22T16:34:37.619948" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ body={"status":"detached","ue_id":5} 
+ </msg>
+<msg time="2026-04-22T16:34:37.619990" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>epc</arg>
+<arg>/ues/${ue_id_int}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.617537" elapsed="0.002464"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.620187" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<arg>${LAST_RESPONSE}</arg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.620067" elapsed="0.000134"/>
+</kw>
+<status status="PASS" start="2026-04-22T16:34:37.617275" elapsed="0.002948"/>
+</kw>
+<tag>bearer</tag>
+<tag>happy-path</tag>
+<status status="PASS" start="2026-04-22T16:34:37.605848" elapsed="0.014388"/>
+</test>
+<kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-22T16:34:37.621586" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+ path_url=/reset 
+ headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-22T16:34:37.621619" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ body={"status":"reset"} 
+ </msg>
+<arg>epc</arg>
+<arg>/reset</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.620476" elapsed="0.001165"/>
+</kw>
+<status status="PASS" start="2026-04-22T16:34:37.620400" elapsed="0.001266"/>
+</kw>
+<doc>Bearer add/remove tests.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.604504" elapsed="0.017173"/>
+</suite>
+<suite id="s1-s3" name="Traffic Tests" source="/tests/traffic_tests.robot">
+<kw name="Setup Simulator Session" owner="epc_keywords" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-04-22T16:34:37.623061" level="INFO">Creating Session using : alias=epc, url=http://epc-simulator:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>epc</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-04-22T16:34:37.623011" elapsed="0.000104"/>
+</kw>
+<status status="PASS" start="2026-04-22T16:34:37.622931" elapsed="0.000207"/>
+</kw>
+<test id="s1-s3-t1" name="TC_01 Rozpoczęcie transferu z prawidłową prędkością zwraca 200 i poprawne dane" line="13">
+<kw name="Full Setup With Bearer" type="SETUP">
+<kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.623734" level="INFO">${ue_id_int} = 5</msg>
+<var>${ue_id_int}</var>
+<arg>${ue_id}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.623602" elapsed="0.000142"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.623912" level="INFO">${dane} = {'ue_id': 5}</msg>
+<var>${dane}</var>
+<arg>ue_id=${ue_id_int}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.623796" elapsed="0.000125"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-22T16:34:37.626436" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+ path_url=/ues 
+ headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
+ body=b'{"ue_id": 5}' 
+ </msg>
+<msg time="2026-04-22T16:34:37.626559" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ body={"status":"attached","ue_id":5} 
+ </msg>
+<msg time="2026-04-22T16:34:37.626625" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>epc</arg>
+<arg>/ues</arg>
+<arg>json=${dane}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.623969" elapsed="0.002667"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.627030" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<arg>${LAST_RESPONSE}</arg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.626709" elapsed="0.000337"/>
+</kw>
+<status status="PASS" start="2026-04-22T16:34:37.623501" elapsed="0.003567"/>
+</kw>
+<kw name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;">
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.627498" level="INFO">${ue_id_int} = 5</msg>
+<var>${ue_id_int}</var>
+<arg>${ue_id}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.627309" elapsed="0.000198"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.627665" level="INFO">${bearer_id_int} = 9</msg>
+<var>${bearer_id_int}</var>
+<arg>${bearer_id}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.627556" elapsed="0.000118"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.627843" level="INFO">${dane} = {'bearer_id': 9}</msg>
+<var>${dane}</var>
+<arg>bearer_id=${bearer_id_int}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.627724" elapsed="0.000127"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-04-22T16:34:37.629066" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
+ path_url=/ues/5/bearers 
+ headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '16', 'Content-Type': 'application/json'} 
+ body=b'{"bearer_id": 9}' 
+ </msg>
+<msg time="2026-04-22T16:34:37.629086" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
+ status=400, reason=Bad Request 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
+ body={"detail":"Bearer already exists"} 
+ </msg>
+<msg time="2026-04-22T16:34:37.629121" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>epc</arg>
+<arg>/ues/${ue_id_int}/bearers</arg>
+<arg>json=${dane}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.627899" elapsed="0.001230"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-22T16:34:37.629322" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<arg>${LAST_RESPONSE}</arg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-22T16:34:37.629194" elapsed="0.000142"/>
+</kw>
+<status status="PASS" start="2026-04-22T16:34:37.627194" elapsed="0.002163"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <doc>Attach UE and add bearer so traffic endpoint is reachable</doc>
-<status status="PASS" start="2026-04-22T13:56:16.692051" elapsed="0.035011"/>
+<status status="PASS" start="2026-04-22T16:34:37.623341" elapsed="0.006031"/>
 </kw>
 <kw name="Start Traffic On Bearer &quot;${VALID_BEARER}&quot; Of UE &quot;${VALID_UE}&quot; With Speed &quot;${SPEED_MBPS}&quot;" owner="epc_keywords" source_name="Start Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot; With Speed &quot;${mbps}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.729475" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.629787" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.728928" elapsed="0.000593"/>
+<status status="PASS" start="2026-04-22T16:34:37.629679" elapsed="0.000117"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.730392" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.629940" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.729880" elapsed="0.000550"/>
+<status status="PASS" start="2026-04-22T16:34:37.629846" elapsed="0.000103"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.731073" level="INFO">${mbps_int} = 10</msg>
+<msg time="2026-04-22T16:34:37.630080" level="INFO">${mbps_int} = 10</msg>
 <var>${mbps_int}</var>
 <arg>${mbps}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.730597" elapsed="0.000526"/>
+<status status="PASS" start="2026-04-22T16:34:37.629994" elapsed="0.000094"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.731960" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
+<msg time="2026-04-22T16:34:37.630262" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
 <var>${dane}</var>
 <arg>protocol=tcp</arg>
 <arg>Mbps=${mbps_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.731339" elapsed="0.000653"/>
+<status status="PASS" start="2026-04-22T16:34:37.630133" elapsed="0.000137"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.758264" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.637495" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '31', 'Content-Type': 'application/json'} 
  body=b'{"protocol": "tcp", "Mbps": 10}' 
  </msg>
-<msg time="2026-04-22T13:56:16.758421" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.637523" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
  body={"status":"traffic_started","ue_id":5,"bearer_id":9,"target_bps":10000000} 
  </msg>
-<msg time="2026-04-22T13:56:16.758733" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.637567" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.732223" elapsed="0.026558"/>
+<status status="PASS" start="2026-04-22T16:34:37.630315" elapsed="0.007262"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.760104" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.637795" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.759172" elapsed="0.001032"/>
+<status status="PASS" start="2026-04-22T16:34:37.637658" elapsed="0.000153"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.728202" elapsed="0.032201"/>
+<status status="PASS" start="2026-04-22T16:34:37.629534" elapsed="0.008302"/>
 </kw>
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.762411" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.638219" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.761416" elapsed="0.001109"/>
+<status status="PASS" start="2026-04-22T16:34:37.638001" elapsed="0.000240"/>
 </kw>
 <arg>200</arg>
-<status status="PASS" start="2026-04-22T13:56:16.760685" elapsed="0.002051"/>
+<status status="PASS" start="2026-04-22T16:34:37.637891" elapsed="0.000380"/>
 </kw>
 <kw name="Response Should Contain UE &quot;${VALID_UE}&quot; And Bearer &quot;${VALID_BEARER}&quot;" owner="epc_keywords" source_name="Response Should Contain UE &quot;${ue_id}&quot; And Bearer &quot;${bearer_id}&quot;">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[ue_id]</arg>
 <arg>${ue_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.764398" elapsed="0.001138"/>
+<status status="PASS" start="2026-04-22T16:34:37.638533" elapsed="0.000234"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[bearer_id]</arg>
 <arg>${bearer_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.765853" elapsed="0.001026"/>
+<status status="PASS" start="2026-04-22T16:34:37.638943" elapsed="0.000260"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.763594" elapsed="0.003402"/>
+<status status="PASS" start="2026-04-22T16:34:37.638411" elapsed="0.000817"/>
 </kw>
 <kw name="Response Field &quot;target_bps&quot; Should Be Greater Than ${0}" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Be Greater Than ${value}">
 <kw name="Should Be True" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${field}] &gt; ${value}</arg>
 <doc>Fails if the given condition is not true.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.768765" elapsed="0.001585"/>
+<status status="PASS" start="2026-04-22T16:34:37.639495" elapsed="0.000287"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.767671" elapsed="0.002816"/>
+<status status="PASS" start="2026-04-22T16:34:37.639321" elapsed="0.000486"/>
 </kw>
 <kw name="Full Teardown With Bearer" type="TEARDOWN">
 <kw name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.777621" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.640675" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.777074" elapsed="0.000598"/>
+<status status="PASS" start="2026-04-22T16:34:37.640566" elapsed="0.000119"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.778627" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.640817" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.778039" elapsed="0.000648"/>
+<status status="PASS" start="2026-04-22T16:34:37.640732" elapsed="0.000093"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.794846" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.643885" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.795087" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.643911" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
  body={"status":"traffic_stopped","ue_id":5,"bearer_id":9} 
  </msg>
-<msg time="2026-04-22T13:56:16.795321" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.643952" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.779048" elapsed="0.016335"/>
+<status status="PASS" start="2026-04-22T16:34:37.640869" elapsed="0.003093"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.797103" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.644173" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.795945" elapsed="0.001262"/>
+<status status="PASS" start="2026-04-22T16:34:37.644026" elapsed="0.000162"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.776427" elapsed="0.020943"/>
+<status status="PASS" start="2026-04-22T16:34:37.640459" elapsed="0.003751"/>
 </kw>
 <arg>Stop Traffic On Bearer "${bearer_id}" Of UE "${ue_id}"</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.774733" elapsed="0.022720"/>
+<status status="PASS" start="2026-04-22T16:34:37.640189" elapsed="0.004034"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.773235" elapsed="0.024330"/>
+<status status="PASS" start="2026-04-22T16:34:37.640076" elapsed="0.004162"/>
 </kw>
 <kw name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.799769" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.644576" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.799214" elapsed="0.000592"/>
+<status status="PASS" start="2026-04-22T16:34:37.644482" elapsed="0.000115"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.800598" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.644755" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.800045" elapsed="0.000584"/>
+<status status="PASS" start="2026-04-22T16:34:37.644663" elapsed="0.000100"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.806034" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.645924" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
  path_url=/ues/5/bearers/9 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.806121" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.645946" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
  body={"detail":"Cannot remove default bearer"} 
  </msg>
-<msg time="2026-04-22T13:56:16.806275" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.645981" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.800898" elapsed="0.005408"/>
+<status status="PASS" start="2026-04-22T16:34:37.644812" elapsed="0.001180"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.809420" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.646161" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.806606" elapsed="0.003096"/>
+<status status="PASS" start="2026-04-22T16:34:37.646052" elapsed="0.000122"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.798436" elapsed="0.011942"/>
+<status status="PASS" start="2026-04-22T16:34:37.644358" elapsed="0.001835"/>
 </kw>
 <kw name="Detach Device With ID &quot;${ue_id}&quot; From Network" owner="epc_keywords" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.812615" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.646483" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.812062" elapsed="0.000599"/>
+<status status="PASS" start="2026-04-22T16:34:37.646388" elapsed="0.000103"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.824690" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.648434" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
  path_url=/ues/5 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.824933" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.648454" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"detached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:16.825141" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.648486" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.812928" elapsed="0.012276"/>
+<status status="PASS" start="2026-04-22T16:34:37.646533" elapsed="0.001962"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.827488" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.648681" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.825847" elapsed="0.001815"/>
+<status status="PASS" start="2026-04-22T16:34:37.648551" elapsed="0.000145"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.811332" elapsed="0.016741"/>
+<status status="PASS" start="2026-04-22T16:34:37.646281" elapsed="0.002533"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <doc>Stop any running traffic, remove bearer, detach UE</doc>
-<status status="PASS" start="2026-04-22T13:56:16.770888" elapsed="0.057474"/>
+<status status="PASS" start="2026-04-22T16:34:37.639884" elapsed="0.008951"/>
 </kw>
 <tag>happy-path</tag>
 <tag>smoke</tag>
 <tag>start</tag>
 <tag>traffic</tag>
-<status status="PASS" start="2026-04-22T13:56:16.691209" elapsed="0.137268"/>
+<status status="PASS" start="2026-04-22T16:34:37.623175" elapsed="0.025680"/>
 </test>
-<test id="s1-s2-t2" name="TC_02 Zatrzymanie aktywnego transferu zwraca 200 i poprawne dane" line="22">
+<test id="s1-s3-t2" name="TC_02 Zatrzymanie aktywnego transferu zwraca 200 i poprawne dane" line="22">
 <kw name="Full Setup With Active Traffic" type="SETUP">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.833999" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.649510" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.833260" elapsed="0.000783"/>
+<status status="PASS" start="2026-04-22T16:34:37.649407" elapsed="0.000113"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.834833" level="INFO">${dane} = {'ue_id': 5}</msg>
+<msg time="2026-04-22T16:34:37.649707" level="INFO">${dane} = {'ue_id': 5}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.834262" elapsed="0.000604"/>
+<status status="PASS" start="2026-04-22T16:34:37.649569" elapsed="0.000148"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.848801" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.651890" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 5}' 
  </msg>
-<msg time="2026-04-22T13:56:16.848942" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.651911" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:16.849302" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.651944" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.835540" elapsed="0.013799"/>
+<status status="PASS" start="2026-04-22T16:34:37.649765" elapsed="0.002187"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.850880" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.652290" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.849563" elapsed="0.001389"/>
+<status status="PASS" start="2026-04-22T16:34:37.652010" elapsed="0.000293"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.832403" elapsed="0.018631"/>
+<status status="PASS" start="2026-04-22T16:34:37.649308" elapsed="0.003014"/>
 </kw>
 <kw name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.852599" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.652649" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.852054" elapsed="0.000581"/>
+<status status="PASS" start="2026-04-22T16:34:37.652545" elapsed="0.000112"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.853207" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.652803" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.852789" elapsed="0.000447"/>
+<status status="PASS" start="2026-04-22T16:34:37.652709" elapsed="0.000102"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.853907" level="INFO">${dane} = {'bearer_id': 9}</msg>
+<msg time="2026-04-22T16:34:37.652974" level="INFO">${dane} = {'bearer_id': 9}</msg>
 <var>${dane}</var>
 <arg>bearer_id=${bearer_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.853408" elapsed="0.000554"/>
+<status status="PASS" start="2026-04-22T16:34:37.652861" elapsed="0.000121"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.858909" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
+<msg time="2026-04-22T16:34:37.654135" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
  path_url=/ues/5/bearers 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '16', 'Content-Type': 'application/json'} 
  body=b'{"bearer_id": 9}' 
  </msg>
-<msg time="2026-04-22T13:56:16.859039" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
+<msg time="2026-04-22T16:34:37.654162" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
  body={"detail":"Bearer already exists"} 
  </msg>
-<msg time="2026-04-22T13:56:16.859230" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.654197" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.854157" elapsed="0.005138"/>
+<status status="PASS" start="2026-04-22T16:34:37.653027" elapsed="0.001179"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.860696" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.654372" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.859697" elapsed="0.001154"/>
+<status status="PASS" start="2026-04-22T16:34:37.654266" elapsed="0.000119"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.851500" elapsed="0.009521"/>
+<status status="PASS" start="2026-04-22T16:34:37.652438" elapsed="0.001966"/>
 </kw>
 <kw name="Start Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot; With Speed &quot;${mbps}&quot;" owner="epc_keywords" source_name="Start Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot; With Speed &quot;${mbps}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.864956" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.654784" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.863840" elapsed="0.001193"/>
+<status status="PASS" start="2026-04-22T16:34:37.654685" elapsed="0.000108"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.866001" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.655017" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.865361" elapsed="0.000687"/>
+<status status="PASS" start="2026-04-22T16:34:37.654839" elapsed="0.000187"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.866905" level="INFO">${mbps_int} = 10</msg>
+<msg time="2026-04-22T16:34:37.655150" level="INFO">${mbps_int} = 10</msg>
 <var>${mbps_int}</var>
 <arg>${mbps}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.866305" elapsed="0.000672"/>
+<status status="PASS" start="2026-04-22T16:34:37.655069" elapsed="0.000088"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.868027" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
+<msg time="2026-04-22T16:34:37.655308" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
 <var>${dane}</var>
 <arg>protocol=tcp</arg>
 <arg>Mbps=${mbps_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.867296" elapsed="0.000766"/>
+<status status="PASS" start="2026-04-22T16:34:37.655202" elapsed="0.000114"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.890264" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.659395" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '31', 'Content-Type': 'application/json'} 
  body=b'{"protocol": "tcp", "Mbps": 10}' 
  </msg>
-<msg time="2026-04-22T13:56:16.890392" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.659420" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:15 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
  body={"status":"traffic_started","ue_id":5,"bearer_id":9,"target_bps":10000000} 
  </msg>
-<msg time="2026-04-22T13:56:16.890638" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.659459" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.868332" elapsed="0.022405"/>
+<status status="PASS" start="2026-04-22T16:34:37.655358" elapsed="0.004187"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.891820" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.659775" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.891071" elapsed="0.000881"/>
+<status status="PASS" start="2026-04-22T16:34:37.659624" elapsed="0.000167"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.862447" elapsed="0.029639"/>
+<status status="PASS" start="2026-04-22T16:34:37.654543" elapsed="0.005271"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <arg>${SPEED_MBPS}</arg>
 <doc>Attach UE, add bearer and start traffic so stop/stats can be tested</doc>
-<status status="PASS" start="2026-04-22T13:56:16.830470" elapsed="0.061720"/>
+<status status="PASS" start="2026-04-22T16:34:37.649116" elapsed="0.010714"/>
 </kw>
 <kw name="Stop Traffic On Bearer &quot;${VALID_BEARER}&quot; Of UE &quot;${VALID_UE}&quot;" owner="epc_keywords" source_name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.894277" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.660210" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.893523" elapsed="0.001144"/>
+<status status="PASS" start="2026-04-22T16:34:37.660110" elapsed="0.000109"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.896114" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.660372" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.894999" elapsed="0.001192"/>
+<status status="PASS" start="2026-04-22T16:34:37.660268" elapsed="0.000113"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.908908" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.664519" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.909049" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.664542" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
  body={"status":"traffic_stopped","ue_id":5,"bearer_id":9} 
  </msg>
-<msg time="2026-04-22T13:56:16.909279" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.664577" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.897155" elapsed="0.012179"/>
+<status status="PASS" start="2026-04-22T16:34:37.660427" elapsed="0.004158"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.910052" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.664780" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.909541" elapsed="0.000561"/>
+<status status="PASS" start="2026-04-22T16:34:37.664665" elapsed="0.000129"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.892902" elapsed="0.017271"/>
+<status status="PASS" start="2026-04-22T16:34:37.659984" elapsed="0.004832"/>
 </kw>
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.911466" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.665156" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.910741" elapsed="0.000836"/>
+<status status="PASS" start="2026-04-22T16:34:37.664963" elapsed="0.000213"/>
 </kw>
 <arg>200</arg>
-<status status="PASS" start="2026-04-22T13:56:16.910322" elapsed="0.001325"/>
+<status status="PASS" start="2026-04-22T16:34:37.664864" elapsed="0.000331"/>
 </kw>
 <kw name="Response Should Contain UE &quot;${VALID_UE}&quot; And Bearer &quot;${VALID_BEARER}&quot;" owner="epc_keywords" source_name="Response Should Contain UE &quot;${ue_id}&quot; And Bearer &quot;${bearer_id}&quot;">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[ue_id]</arg>
 <arg>${ue_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.912362" elapsed="0.000809"/>
+<status status="PASS" start="2026-04-22T16:34:37.665414" elapsed="0.000205"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[bearer_id]</arg>
 <arg>${bearer_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.913423" elapsed="0.002270"/>
+<status status="PASS" start="2026-04-22T16:34:37.665676" elapsed="0.000205"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.911980" elapsed="0.004034"/>
+<status status="PASS" start="2026-04-22T16:34:37.665308" elapsed="0.000594"/>
 </kw>
 <kw name="Full Teardown With Bearer" type="TEARDOWN">
 <kw name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.920094" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.666745" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.919728" elapsed="0.000399"/>
+<status status="PASS" start="2026-04-22T16:34:37.666648" elapsed="0.000106"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.920643" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.666882" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.920278" elapsed="0.000393"/>
+<status status="PASS" start="2026-04-22T16:34:37.666798" elapsed="0.000092"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.929932" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.669261" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.930034" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.669288" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
  body={"status":"traffic_stopped","ue_id":5,"bearer_id":9} 
  </msg>
-<msg time="2026-04-22T13:56:16.930173" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.669329" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.920814" elapsed="0.009443"/>
+<status status="PASS" start="2026-04-22T16:34:37.666931" elapsed="0.002407"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.931188" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.669533" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.930471" elapsed="0.000834"/>
+<status status="PASS" start="2026-04-22T16:34:37.669405" elapsed="0.000143"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.919304" elapsed="0.012207"/>
+<status status="PASS" start="2026-04-22T16:34:37.666521" elapsed="0.003048"/>
 </kw>
 <arg>Stop Traffic On Bearer "${bearer_id}" Of UE "${ue_id}"</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.918261" elapsed="0.013328"/>
+<status status="PASS" start="2026-04-22T16:34:37.666259" elapsed="0.003323"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.917583" elapsed="0.014079"/>
+<status status="PASS" start="2026-04-22T16:34:37.666152" elapsed="0.003443"/>
 </kw>
 <kw name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.934909" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.669995" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.934400" elapsed="0.000544"/>
+<status status="PASS" start="2026-04-22T16:34:37.669890" elapsed="0.000198"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.935498" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.670233" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.935120" elapsed="0.000406"/>
+<status status="PASS" start="2026-04-22T16:34:37.670140" elapsed="0.000101"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.939089" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.671403" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
  path_url=/ues/5/bearers/9 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.939188" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.671425" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
  body={"detail":"Cannot remove default bearer"} 
  </msg>
-<msg time="2026-04-22T13:56:16.939313" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.671459" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.935669" elapsed="0.004036"/>
+<status status="PASS" start="2026-04-22T16:34:37.670285" elapsed="0.001182"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.940777" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.671659" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.939977" elapsed="0.000861"/>
+<status status="PASS" start="2026-04-22T16:34:37.671527" elapsed="0.000147"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.933155" elapsed="0.007769"/>
+<status status="PASS" start="2026-04-22T16:34:37.669752" elapsed="0.001944"/>
 </kw>
 <kw name="Detach Device With ID &quot;${ue_id}&quot; From Network" owner="epc_keywords" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.942482" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.672076" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.941894" elapsed="0.000625"/>
+<status status="PASS" start="2026-04-22T16:34:37.671901" elapsed="0.000184"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.954529" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.674569" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
  path_url=/ues/5 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:16.954614" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.674590" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"detached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:16.954877" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.674631" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.942685" elapsed="0.012228"/>
+<status status="PASS" start="2026-04-22T16:34:37.672128" elapsed="0.002512"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.955637" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.674815" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.955112" elapsed="0.000575"/>
+<status status="PASS" start="2026-04-22T16:34:37.674697" elapsed="0.000132"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.941336" elapsed="0.014422"/>
+<status status="PASS" start="2026-04-22T16:34:37.671790" elapsed="0.003060"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <doc>Stop any running traffic, remove bearer, detach UE</doc>
-<status status="PASS" start="2026-04-22T13:56:16.916486" elapsed="0.039322"/>
+<status status="PASS" start="2026-04-22T16:34:37.665971" elapsed="0.008894"/>
 </kw>
 <tag>happy-path</tag>
 <tag>smoke</tag>
 <tag>stop</tag>
 <tag>traffic</tag>
-<status status="PASS" start="2026-04-22T13:56:16.829202" elapsed="0.126651"/>
+<status status="PASS" start="2026-04-22T16:34:37.648949" elapsed="0.025932"/>
 </test>
-<test id="s1-s2-t3" name="TC_03 Statystyki aktywnego transferu zwracają 200 i poprawną odpowiedź" line="30">
+<test id="s1-s3-t3" name="TC_03 Statystyki aktywnego transferu zwracają 200 i poprawną odpowiedź" line="30">
 <kw name="Full Setup With Active Traffic" type="SETUP">
 <kw name="Attach Device With ID &quot;${ue_id}&quot; To Network" owner="epc_keywords" source_name="Attach Device With ID &quot;${ue_id}&quot; To Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.959634" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.675484" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.958961" elapsed="0.000715"/>
+<status status="PASS" start="2026-04-22T16:34:37.675396" elapsed="0.000097"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.960657" level="INFO">${dane} = {'ue_id': 5}</msg>
+<msg time="2026-04-22T16:34:37.675659" level="INFO">${dane} = {'ue_id': 5}</msg>
 <var>${dane}</var>
 <arg>ue_id=${ue_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.959952" elapsed="0.000745"/>
+<status status="PASS" start="2026-04-22T16:34:37.675537" elapsed="0.000130"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.973452" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.679993" level="INFO">POST Request : url=http://epc-simulator:8000/ues 
  path_url=/ues 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '12', 'Content-Type': 'application/json'} 
  body=b'{"ue_id": 5}' 
  </msg>
-<msg time="2026-04-22T13:56:16.973535" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
+<msg time="2026-04-22T16:34:37.680019" level="INFO">POST Response : url=http://epc-simulator:8000/ues 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"attached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:16.973687" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.680059" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.960922" elapsed="0.012798"/>
+<status status="PASS" start="2026-04-22T16:34:37.675711" elapsed="0.004358"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.974952" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.680434" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.974048" elapsed="0.001006"/>
+<status status="PASS" start="2026-04-22T16:34:37.680135" elapsed="0.000315"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.958440" elapsed="0.016692"/>
+<status status="PASS" start="2026-04-22T16:34:37.675301" elapsed="0.005170"/>
 </kw>
 <kw name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Add Bearer With ID &quot;${bearer_id}&quot; To UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.976255" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.680841" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.975872" elapsed="0.000412"/>
+<status status="PASS" start="2026-04-22T16:34:37.680736" elapsed="0.000114"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.976887" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.680990" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.976423" elapsed="0.000495"/>
+<status status="PASS" start="2026-04-22T16:34:37.680898" elapsed="0.000100"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.977561" level="INFO">${dane} = {'bearer_id': 9}</msg>
+<msg time="2026-04-22T16:34:37.681152" level="INFO">${dane} = {'bearer_id': 9}</msg>
 <var>${dane}</var>
 <arg>bearer_id=${bearer_id_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.977064" elapsed="0.000525"/>
+<status status="PASS" start="2026-04-22T16:34:37.681047" elapsed="0.000113"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:16.988073" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
+<msg time="2026-04-22T16:34:37.682336" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers 
  path_url=/ues/5/bearers 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '16', 'Content-Type': 'application/json'} 
  body=b'{"bearer_id": 9}' 
  </msg>
-<msg time="2026-04-22T13:56:16.988492" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
+<msg time="2026-04-22T16:34:37.682446" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '34', 'content-type': 'application/json'} 
  body={"detail":"Bearer already exists"} 
  </msg>
-<msg time="2026-04-22T13:56:16.988935" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.682484" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.977731" elapsed="0.011239"/>
+<status status="PASS" start="2026-04-22T16:34:37.681202" elapsed="0.001290"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.990075" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.682690" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.989365" elapsed="0.000770"/>
+<status status="PASS" start="2026-04-22T16:34:37.682559" elapsed="0.000145"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.975475" elapsed="0.014775"/>
+<status status="PASS" start="2026-04-22T16:34:37.680591" elapsed="0.002136"/>
 </kw>
 <kw name="Start Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot; With Speed &quot;${mbps}&quot;" owner="epc_keywords" source_name="Start Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot; With Speed &quot;${mbps}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.992029" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.683084" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.991546" elapsed="0.000514"/>
+<status status="PASS" start="2026-04-22T16:34:37.683002" elapsed="0.000090"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.992693" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.683211" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.992201" elapsed="0.000523"/>
+<status status="PASS" start="2026-04-22T16:34:37.683133" elapsed="0.000085"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.993278" level="INFO">${mbps_int} = 10</msg>
+<msg time="2026-04-22T16:34:37.683336" level="INFO">${mbps_int} = 10</msg>
 <var>${mbps_int}</var>
 <arg>${mbps}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.992929" elapsed="0.000386"/>
+<status status="PASS" start="2026-04-22T16:34:37.683258" elapsed="0.000086"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-22T13:56:16.994207" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
+<msg time="2026-04-22T16:34:37.683487" level="INFO">${dane} = {'protocol': 'tcp', 'Mbps': 10}</msg>
 <var>${dane}</var>
 <arg>protocol=tcp</arg>
 <arg>Mbps=${mbps_int}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.993574" elapsed="0.000666"/>
+<status status="PASS" start="2026-04-22T16:34:37.683386" elapsed="0.000108"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.013021" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.687085" level="INFO">POST Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '31', 'Content-Type': 'application/json'} 
  body=b'{"protocol": "tcp", "Mbps": 10}' 
  </msg>
-<msg time="2026-04-22T13:56:17.013195" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.687110" level="INFO">POST Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '74', 'content-type': 'application/json'} 
  body={"status":"traffic_started","ue_id":5,"bearer_id":9,"target_bps":10000000} 
  </msg>
-<msg time="2026-04-22T13:56:17.013378" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.687148" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>json=${dane}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.994419" elapsed="0.019003"/>
+<status status="PASS" start="2026-04-22T16:34:37.683536" elapsed="0.003621"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.014527" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.687364" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.013950" elapsed="0.000634"/>
+<status status="PASS" start="2026-04-22T16:34:37.687223" elapsed="0.000156"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.991141" elapsed="0.023585"/>
+<status status="PASS" start="2026-04-22T16:34:37.682879" elapsed="0.004522"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <arg>${SPEED_MBPS}</arg>
 <doc>Attach UE, add bearer and start traffic so stop/stats can be tested</doc>
-<status status="PASS" start="2026-04-22T13:56:16.957190" elapsed="0.057592"/>
+<status status="PASS" start="2026-04-22T16:34:37.675131" elapsed="0.012287"/>
 </kw>
 <kw name="Get Traffic Stats On Bearer &quot;${VALID_BEARER}&quot; Of UE &quot;${VALID_UE}&quot;" owner="epc_keywords" source_name="Get Traffic Stats On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.016023" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.687827" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.015624" elapsed="0.000429"/>
+<status status="PASS" start="2026-04-22T16:34:37.687713" elapsed="0.000123"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.016791" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.687979" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.016192" elapsed="0.000629"/>
+<status status="PASS" start="2026-04-22T16:34:37.687885" elapsed="0.000102"/>
 </kw>
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.023840" level="INFO">GET Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.692256" level="INFO">GET Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:17.023930" level="INFO">GET Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.692276" level="INFO">GET Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '134', 'content-type': 'application/json'} 
- body={"ue_id":5,"bearer_id":9,"protocol":"tcp","target_bps":10000000,"tx_bps":584702372,"rx_bps":584702372,"duration":0.017102718353271484} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '137', 'content-type': 'application/json'} 
+ body={"ue_id":5,"bearer_id":9,"protocol":"tcp","target_bps":10000000,"tx_bps":1674038714,"rx_bps":1674038714,"duration":0.0059735774993896484} 
  </msg>
-<msg time="2026-04-22T13:56:17.024056" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.692310" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.017000" elapsed="0.007085"/>
+<status status="PASS" start="2026-04-22T16:34:37.688033" elapsed="0.004285"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.024728" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.692563" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.024274" elapsed="0.000499"/>
+<status status="PASS" start="2026-04-22T16:34:37.692376" elapsed="0.000200"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.015193" elapsed="0.009644"/>
+<status status="PASS" start="2026-04-22T16:34:37.687574" elapsed="0.005022"/>
 </kw>
 <kw name="Response Status Should Be" owner="epc_keywords">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.026054" level="INFO">Argument types are:
+<msg time="2026-04-22T16:34:37.692974" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${LAST_RESPONSE.status_code}</arg>
 <arg>${expected_code}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.025366" elapsed="0.000779"/>
+<status status="PASS" start="2026-04-22T16:34:37.692761" elapsed="0.000235"/>
 </kw>
 <arg>200</arg>
-<status status="PASS" start="2026-04-22T13:56:17.025051" elapsed="0.001158"/>
+<status status="PASS" start="2026-04-22T16:34:37.692658" elapsed="0.000358"/>
 </kw>
 <kw name="Response Should Contain UE &quot;${VALID_UE}&quot; And Bearer &quot;${VALID_BEARER}&quot;" owner="epc_keywords" source_name="Response Should Contain UE &quot;${ue_id}&quot; And Bearer &quot;${bearer_id}&quot;">
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[ue_id]</arg>
 <arg>${ue_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.026880" elapsed="0.000698"/>
+<status status="PASS" start="2026-04-22T16:34:37.693230" elapsed="0.000194"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[bearer_id]</arg>
 <arg>${bearer_id}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.027749" elapsed="0.000674"/>
+<status status="PASS" start="2026-04-22T16:34:37.693467" elapsed="0.000389"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.026554" elapsed="0.001954"/>
+<status status="PASS" start="2026-04-22T16:34:37.693127" elapsed="0.000757"/>
 </kw>
 <kw name="Response Field &quot;protocol&quot; Should Equal" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Equal">
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${field}]</arg>
 <arg>${expected}</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.029101" elapsed="0.000794"/>
+<status status="PASS" start="2026-04-22T16:34:37.694060" elapsed="0.000212"/>
 </kw>
 <arg>tcp</arg>
-<status status="PASS" start="2026-04-22T13:56:17.028694" elapsed="0.001280"/>
+<status status="PASS" start="2026-04-22T16:34:37.693953" elapsed="0.000340"/>
 </kw>
 <kw name="Response Field &quot;target_bps&quot; Should Be Greater Than ${0}" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Be Greater Than ${value}">
 <kw name="Should Be True" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${field}] &gt; ${value}</arg>
 <doc>Fails if the given condition is not true.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.030988" elapsed="0.000953"/>
+<status status="PASS" start="2026-04-22T16:34:37.694568" elapsed="0.000255"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.030323" elapsed="0.002443"/>
+<status status="PASS" start="2026-04-22T16:34:37.694380" elapsed="0.000465"/>
 </kw>
 <kw name="Response Field &quot;tx_bps&quot; Should Be Present" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Be Present">
 <kw name="Dictionary Should Contain Key" owner="Collections">
 <arg>${LAST_RESPONSE.json()}</arg>
 <arg>${field}</arg>
 <doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.033452" elapsed="0.000690"/>
+<status status="PASS" start="2026-04-22T16:34:37.695000" elapsed="0.000154"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.033078" elapsed="0.001162"/>
+<status status="PASS" start="2026-04-22T16:34:37.694907" elapsed="0.000266"/>
 </kw>
 <kw name="Response Field &quot;rx_bps&quot; Should Be Present" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Be Present">
 <kw name="Dictionary Should Contain Key" owner="Collections">
 <arg>${LAST_RESPONSE.json()}</arg>
 <arg>${field}</arg>
 <doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.034757" elapsed="0.000546"/>
+<status status="PASS" start="2026-04-22T16:34:37.695308" elapsed="0.000137"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.034426" elapsed="0.000974"/>
+<status status="PASS" start="2026-04-22T16:34:37.695226" elapsed="0.000238"/>
 </kw>
 <kw name="Response Field &quot;duration&quot; Should Be Greater Or Equal ${0}" owner="epc_keywords" source_name="Response Field &quot;${field}&quot; Should Be Greater Or Equal ${value}">
 <kw name="Should Be True" owner="BuiltIn">
 <arg>${LAST_RESPONSE.json()}[${field}] &gt;= ${value}</arg>
 <doc>Fails if the given condition is not true.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.036315" elapsed="0.001888"/>
+<status status="PASS" start="2026-04-22T16:34:37.695714" elapsed="0.000305"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.035718" elapsed="0.002720"/>
+<status status="PASS" start="2026-04-22T16:34:37.695541" elapsed="0.000497"/>
 </kw>
 <kw name="Full Teardown With Bearer" type="TEARDOWN">
 <kw name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic Silently On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Stop Traffic On Bearer &quot;${bearer_id}&quot; Of UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.043214" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.696828" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.042755" elapsed="0.000493"/>
+<status status="PASS" start="2026-04-22T16:34:37.696743" elapsed="0.000094"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.043755" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.696958" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.043390" elapsed="0.000393"/>
+<status status="PASS" start="2026-04-22T16:34:37.696879" elapsed="0.000087"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.054079" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.699632" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  path_url=/ues/5/bearers/9/traffic 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:17.054163" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
+<msg time="2026-04-22T16:34:37.699653" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9/traffic 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '52', 'content-type': 'application/json'} 
  body={"status":"traffic_stopped","ue_id":5,"bearer_id":9} 
  </msg>
-<msg time="2026-04-22T13:56:17.054285" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.699685" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}/traffic</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.043921" elapsed="0.010392"/>
+<status status="PASS" start="2026-04-22T16:34:37.697005" elapsed="0.002689"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.055593" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.699868" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.054528" elapsed="0.001174"/>
+<status status="PASS" start="2026-04-22T16:34:37.699751" elapsed="0.000131"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.042199" elapsed="0.013743"/>
+<status status="PASS" start="2026-04-22T16:34:37.696637" elapsed="0.003266"/>
 </kw>
 <arg>Stop Traffic On Bearer "${bearer_id}" Of UE "${ue_id}"</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.040654" elapsed="0.015355"/>
+<status status="PASS" start="2026-04-22T16:34:37.696378" elapsed="0.003537"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.040070" elapsed="0.016001"/>
+<status status="PASS" start="2026-04-22T16:34:37.696271" elapsed="0.003659"/>
 </kw>
 <kw name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;" owner="epc_keywords" source_name="Remove Bearer With ID &quot;${bearer_id}&quot; From UE &quot;${ue_id}&quot;">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.058669" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.700242" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.058188" elapsed="0.000520"/>
+<status status="PASS" start="2026-04-22T16:34:37.700158" elapsed="0.000092"/>
 </kw>
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.059519" level="INFO">${bearer_id_int} = 9</msg>
+<msg time="2026-04-22T16:34:37.700371" level="INFO">${bearer_id_int} = 9</msg>
 <var>${bearer_id_int}</var>
 <arg>${bearer_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.058863" elapsed="0.000704"/>
+<status status="PASS" start="2026-04-22T16:34:37.700291" elapsed="0.000088"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.063875" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.701535" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5/bearers/9 
  path_url=/ues/5/bearers/9 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:17.063968" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
+<msg time="2026-04-22T16:34:37.701555" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5/bearers/9 
  status=400, reason=Bad Request 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '41', 'content-type': 'application/json'} 
  body={"detail":"Cannot remove default bearer"} 
  </msg>
-<msg time="2026-04-22T13:56:17.064096" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.701588" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}/bearers/${bearer_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.059787" elapsed="0.004338"/>
+<status status="PASS" start="2026-04-22T16:34:37.700419" elapsed="0.001176"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.064787" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-22T16:34:37.701779" level="INFO">${LAST_RESPONSE} = &lt;Response [400]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.064379" elapsed="0.000455"/>
+<status status="PASS" start="2026-04-22T16:34:37.701663" elapsed="0.000130"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.057604" elapsed="0.007323"/>
+<status status="PASS" start="2026-04-22T16:34:37.700044" elapsed="0.001770"/>
 </kw>
 <kw name="Detach Device With ID &quot;${ue_id}&quot; From Network" owner="epc_keywords" source_name="Detach Device With ID &quot;${ue_id}&quot; From Network">
 <kw name="Convert To Integer" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.066204" level="INFO">${ue_id_int} = 5</msg>
+<msg time="2026-04-22T16:34:37.702258" level="INFO">${ue_id_int} = 5</msg>
 <var>${ue_id_int}</var>
 <arg>${ue_id}</arg>
 <doc>Converts the given item to an integer number.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.065729" elapsed="0.000527"/>
+<status status="PASS" start="2026-04-22T16:34:37.702152" elapsed="0.000116"/>
 </kw>
 <kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.077191" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.704626" level="INFO">DELETE Request : url=http://epc-simulator:8000/ues/5 
  path_url=/ues/5 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:17.077320" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
+<msg time="2026-04-22T16:34:37.704646" level="INFO">DELETE Response : url=http://epc-simulator:8000/ues/5 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '31', 'content-type': 'application/json'} 
  body={"status":"detached","ue_id":5} 
  </msg>
-<msg time="2026-04-22T13:56:17.077940" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.704677" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>epc</arg>
 <arg>/ues/${ue_id_int}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.066441" elapsed="0.011536"/>
+<status status="PASS" start="2026-04-22T16:34:37.702338" elapsed="0.002347"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-22T13:56:17.078795" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-22T16:34:37.704847" level="INFO">${LAST_RESPONSE} = &lt;Response [200]&gt;</msg>
 <arg>${LAST_RESPONSE}</arg>
 <arg>${response}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.078281" elapsed="0.000567"/>
+<status status="PASS" start="2026-04-22T16:34:37.704741" elapsed="0.000119"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.065300" elapsed="0.013619"/>
+<status status="PASS" start="2026-04-22T16:34:37.702016" elapsed="0.002865"/>
 </kw>
 <arg>${VALID_UE}</arg>
 <arg>${VALID_BEARER}</arg>
 <doc>Stop any running traffic, remove bearer, detach UE</doc>
-<status status="PASS" start="2026-04-22T13:56:17.038973" elapsed="0.039994"/>
+<status status="PASS" start="2026-04-22T16:34:37.696102" elapsed="0.008793"/>
 </kw>
 <tag>happy-path</tag>
 <tag>smoke</tag>
 <tag>stats</tag>
 <tag>traffic</tag>
-<status status="PASS" start="2026-04-22T13:56:16.956148" elapsed="0.122863"/>
+<status status="PASS" start="2026-04-22T16:34:37.674971" elapsed="0.029941"/>
 </test>
 <doc>Traffic start, stop and stats tests based on documentation.</doc>
-<status status="PASS" start="2026-04-22T13:56:16.676371" elapsed="0.403181"/>
+<status status="PASS" start="2026-04-22T16:34:37.621858" elapsed="0.083176"/>
 </suite>
 <kw name="Reset Simulator" owner="epc_keywords" type="TEARDOWN">
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-04-22T13:56:17.086567" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.706420" level="INFO">POST Request : url=http://epc-simulator:8000/reset 
  path_url=/reset 
  headers={'User-Agent': 'python-requests/2.33.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-22T13:56:17.086649" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
+<msg time="2026-04-22T16:34:37.706443" level="INFO">POST Response : url=http://epc-simulator:8000/reset 
  status=200, reason=OK 
- headers={'date': 'Wed, 22 Apr 2026 13:56:16 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
+ headers={'date': 'Wed, 22 Apr 2026 16:34:37 GMT', 'server': 'uvicorn', 'content-length': '18', 'content-type': 'application/json'} 
  body={"status":"reset"} 
  </msg>
 <arg>epc</arg>
 <arg>/reset</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-04-22T13:56:17.081965" elapsed="0.004777"/>
+<status status="PASS" start="2026-04-22T16:34:37.705349" elapsed="0.001115"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:17.081482" elapsed="0.005370"/>
+<status status="PASS" start="2026-04-22T16:34:37.705279" elapsed="0.001212"/>
 </kw>
-<status status="PASS" start="2026-04-22T13:56:16.228738" elapsed="0.858149"/>
+<status status="PASS" start="2026-04-22T16:34:37.364163" elapsed="0.342337"/>
 </suite>
 <statistics>
 <total>
-<stat pass="8" fail="0" skip="0">All Tests</stat>
+<stat pass="9" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 <stat pass="1" fail="0" skip="0">attach</stat>
+<stat pass="1" fail="0" skip="0">bearer</stat>
 <stat pass="1" fail="0" skip="0">detach</stat>
-<stat pass="3" fail="0" skip="0">happy-path</stat>
+<stat pass="4" fail="0" skip="0">happy-path</stat>
 <stat pass="3" fail="0" skip="0">negative</stat>
 <stat pass="2" fail="0" skip="0">positive</stat>
 <stat pass="3" fail="0" skip="0">smoke</stat>
@@ -1763,9 +1947,10 @@
 <stat pass="3" fail="0" skip="0">traffic</stat>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="8" fail="0" skip="0">Tests</stat>
+<stat name="Tests" id="s1" pass="9" fail="0" skip="0">Tests</stat>
 <stat name="02 Ue Attachment" id="s1-s1" pass="5" fail="0" skip="0">Tests.02 Ue Attachment</stat>
-<stat name="Traffic Tests" id="s1-s2" pass="3" fail="0" skip="0">Tests.Traffic Tests</stat>
+<stat name="Bearer Tests" id="s1-s2" pass="1" fail="0" skip="0">Tests.Bearer Tests</stat>
+<stat name="Traffic Tests" id="s1-s3" pass="3" fail="0" skip="0">Tests.Traffic Tests</stat>
 </suite>
 </statistics>
 <errors>
