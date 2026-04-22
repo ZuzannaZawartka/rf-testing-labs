@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../resources/epc_keywords.resource
-Documentation     Traffic start tests based on documentation.
+Documentation     Traffic start and stop tests based on documentation.
 Suite Setup       Setup Simulator Session
 
 *** Variables ***
@@ -19,6 +19,14 @@ TC_01 Rozpoczęcie transferu z prawidłową prędkością zwraca 200 i poprawne 
     Response Should Contain UE "${VALID_UE}" And Bearer "${VALID_BEARER}"
     Response Field "target_bps" Should Be Greater Than ${0}
 
+TC_02 Zatrzymanie aktywnego transferu zwraca 200 i poprawne dane
+    [Tags]       traffic    stop    happy-path    smoke
+    [Setup]      Full Setup With Active Traffic    ${VALID_UE}    ${VALID_BEARER}    ${SPEED_MBPS}
+    [Teardown]   Full Teardown With Bearer    ${VALID_UE}    ${VALID_BEARER}
+    Stop Traffic On Bearer "${VALID_BEARER}" Of UE "${VALID_UE}"
+    Response Status Should Be                200
+    Response Should Contain UE "${VALID_UE}" And Bearer "${VALID_BEARER}"
+
 *** Keywords ***
 
 # --- Environment setup/teardown ---
@@ -28,6 +36,13 @@ Full Setup With Bearer
     [Arguments]    ${ue_id}    ${bearer_id}
     Attach Device With ID "${ue_id}" To Network
     Add Bearer With ID "${bearer_id}" To UE "${ue_id}"
+
+Full Setup With Active Traffic
+    [Documentation]    Attach UE, add bearer and start traffic so stop can be tested
+    [Arguments]    ${ue_id}    ${bearer_id}    ${mbps}
+    Attach Device With ID "${ue_id}" To Network
+    Add Bearer With ID "${bearer_id}" To UE "${ue_id}"
+    Start Traffic On Bearer "${bearer_id}" Of UE "${ue_id}" With Speed "${mbps}"
 
 Full Teardown With Bearer
     [Documentation]    Stop any running traffic, remove bearer, detach UE
