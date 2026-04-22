@@ -6,7 +6,6 @@ Suite Teardown    Reset Simulator
 Test Teardown     Reset Simulator
 
 *** Variables ***
-${BASE_URL}        http://localhost:8000
 ${VALID_UE}        ${5}
 ${VALID_BEARER}    ${3}
 
