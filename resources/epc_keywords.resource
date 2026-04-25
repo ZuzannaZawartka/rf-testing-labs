@@ -147,3 +147,12 @@ the system should reject the request with an error
 
 the operation should be successful
     Response Should Be Successful
+
+Prepare UE ${ue_id} With Bearer ${bearer_id}
+    Reset Machine
+    Attach UE ${ue_id}
+    Add Bearer ${bearer_id} To UE ${ue_id}
+
+Prepare UE ${ue_id} With Active Traffic ${bearer_id} At ${mbps} Mbps
+    Prepare UE ${ue_id} With Bearer ${bearer_id}
+    Start Traffic On UE ${ue_id} With Bearer ${bearer_id} At ${mbps} Mbps

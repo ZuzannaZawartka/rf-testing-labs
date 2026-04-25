@@ -53,15 +53,3 @@ TC-022 Prevent Traffic On Inactive Bearer 5 For UE 5
     Verify Error Message For Inactive Bearer
 
 
-*** Keywords ***
-
-Prepare UE ${ue_id} With Bearer ${bearer_id}
-    Reset Machine
-    Attach UE ${ue_id}
-    Add Bearer ${bearer_id} To UE ${ue_id}
-
-Prepare UE ${ue_id} With Active Traffic ${bearer_id} At ${mbps} Mbps
-    Prepare UE ${ue_id} With Bearer ${bearer_id}
-    Start Traffic On UE ${ue_id} With Bearer ${bearer_id} At ${mbps} Mbps
-
-
