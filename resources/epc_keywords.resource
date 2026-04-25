@@ -6,7 +6,6 @@ Library           Collections
 ${BASE_URL}       http://epc-simulator:8000
 
 *** Keywords ***
-
 Initialize Simulator Session
     Create Session    epc    ${BASE_URL}
 
@@ -14,14 +13,12 @@ Reset Machine
     POST On Session    epc    /reset    expected_status=any
 
 Attach UE ${ue_id}
-    # zostaly polaczone dwa ack z attach i detach bo bez tego nie dziala
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${dane}=    Create Dictionary    ue_id=${ue_id_int}
     ${response}=    POST On Session    epc    /ues    json=${dane}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
 
 Detach UE ${ue_id}
-    # zostaly polaczone dwa ack z attach i detach bo bez tego nie dziala
     ${ue_id_int}=    Convert To Integer    ${ue_id}
     ${response}=    DELETE On Session    epc    /ues/${ue_id_int}    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
@@ -66,8 +63,6 @@ Retrieve Traffic Stats For UE ${ue_id} On Bearer ${bearer_id}
     ${bearer_id_int}=    Convert To Integer    ${bearer_id}
     ${response}=    GET On Session    epc    /ues/${ue_id_int}/bearers/${bearer_id_int}/traffic    expected_status=any
     Set Test Variable    ${LAST_RESPONSE}    ${response}
-
-# Verification Keywords
 
 Response Should Be Successful
     Should Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
@@ -135,4 +130,20 @@ Verify Message Contains Boundary
     Run Keyword If    '${lower}' in """${detail}""" or '${upper}' in """${detail}"""    Return From Keyword
     Fail    Komunikat błędu nie odnosi się do granic zakresu ${lower}-${upper} określonego w dokumentacji (Otrzymano: ${detail})
 
+UE "${ue_id}" is attached to the network
+    Attach UE ${ue_id}
+    Response Should Be Successful
 
+bearer "${bearer_id}" is added to UE "${ue_id}"
+    Add Bearer ${bearer_id} To UE ${ue_id}
+    Response Should Be Successful
+
+I start traffic for UE "${ue_id}" on bearer "${bearer_id}" at "${mbps}" Mbps
+    Start Traffic On UE ${ue_id} With Bearer ${bearer_id} At ${mbps} Mbps
+    Response Should Be Successful
+
+the system should reject the request with an error
+    Should Not Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
+
+the operation should be successful
+    Response Should Be Successful
