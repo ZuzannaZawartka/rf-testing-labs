@@ -115,14 +115,14 @@ Verify Default Bearer ${bearer_id} Exists For UE ${ue_id}
 
 Verify Traffic Started At Around ${expected_mbps} Mbps
     Should Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
-    ${actual_bps}=     Set Variable    ${LAST_RESPONSE.json()}[target_bps]
+    ${target_bps}=     Set Variable    ${LAST_RESPONSE.json()}[target_bps]
     ${expected_bps}=   Evaluate    ${expected_mbps} * 1000000
     ${lower_bps}=      Evaluate    ${expected_bps} * 0.9
     ${upper_bps}=      Evaluate    ${expected_bps} * 1.1
-    Should Be True    ${actual_bps} >= ${lower_bps}
-    ...    Expected >= ${lower_bps} bps (90%% of ${expected_mbps} Mbps), got ${actual_bps}
-    Should Be True    ${actual_bps} <= ${upper_bps}
-    ...    Expected <= ${upper_bps} bps (110%% of ${expected_mbps} Mbps), got ${actual_bps}
+    Should Be True    ${target_bps} >= ${lower_bps}
+    ...    Expected target_bps >= ${lower_bps} bps (90%% of ${expected_mbps} Mbps), got ${target_bps}
+    Should Be True    ${target_bps} <= ${upper_bps}
+    ...    Expected target_bps <= ${upper_bps} bps (110%% of ${expected_mbps} Mbps), got ${target_bps}
 
 Verify Traffic Stopped On UE ${ue_id} Bearer ${bearer_id} Successfully
     Should Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
@@ -190,7 +190,11 @@ Verify Bearer Rejected As Not Found
     Verify Response Contains Error Matching    Bearer not found
 
 Verify Throughput Value Rejected As Invalid
-    Should Not Be Equal As Integers    ${LAST_RESPONSE.status_code}    200
+    ${status}=      Convert To Integer    ${LAST_RESPONSE.status_code}
+    Should Be True    400 <= ${status} < 500
+    ${detail}=      Get From Dictionary    ${LAST_RESPONSE.json()}    detail
+    ${detail_str}=  Convert To String    ${detail}
+    Should Not Be Empty    ${detail_str}
 
 Prepare Attached UE ${ue_id} With Bearer ${bearer_id}
     # Attach and bearer addition are combined, bearer operations require an attached UE

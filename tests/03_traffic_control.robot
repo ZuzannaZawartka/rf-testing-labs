@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation     Traffic control and data transfer tests.
 Resource          ../resources/epc_keywords.resource
-Suite Setup       Initialize Simulator Session
 Suite Teardown    Reset Simulator
 Test Teardown     Reset Simulator
 
@@ -121,10 +120,12 @@ TC-029 Stop All Traffic Across All Bearers For UE 5 Successfully
     Verify All Traffic Stopped For UE 5 Successfully
 
 TC-030 Start TCP Traffic On UE 5 Bearer 9 Successfully
-    [Documentation]    DEF-008, Verify TCP protocol is accepted by the traffic endpoint.
-    ...                Documentation does NOT mention any protocol parameter, but the API
-    ...                strictly requires i and object require matches to udp/tcp. The simulator accepts both UDP and TCP, so its propably DEF.
-    ...                Attach is a prerequisite, bearer 9 is the default bearer.
+    [Documentation]    DEF-008, Verify the traffic endpoint accepts the TCP protocol.
+    ...                The API documentation does not mention a `protocol` parameter, but
+    ...                the request schema appears to require it and only allows `udp` or
+    ...                `tcp`. This test validates that `tcp` is accepted, indicating a
+    ...                likely documentation defect or missing requirement. Attach is a
+    ...                prerequisite, and bearer 9 is the default bearer.
     [Tags]             traffic    positive    protocol    compliance
     Attach UE 5
     Start Traffic On UE 5 Bearer 9 Protocol tcp At 10 Mbps

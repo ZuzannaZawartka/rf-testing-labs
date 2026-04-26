@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation     Bearer management tests.
 Resource          ../resources/epc_keywords.resource
-Suite Setup       Initialize Simulator Session
 Suite Teardown    Reset Simulator
 Test Teardown     Reset Simulator
 
