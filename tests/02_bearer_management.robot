@@ -1,84 +1,91 @@
 *** Settings ***
+Documentation     Bearer management tests.
 Resource          ../resources/epc_keywords.resource
-Documentation     Bearer Management tests.
 Suite Setup       Initialize Simulator Session
-Suite Teardown    Reset Machine
-Test Teardown     Reset Machine
+Suite Teardown    Reset Simulator
+Test Teardown     Reset Simulator
 
 *** Test Cases ***
 
-TC-009 Add Bearer 3 To Attached UE 5
-    [Documentation]    Verify successful bearer addition to attached UE.
+TC-009 Add Dedicated Bearer 3 To UE 5 Successfully
+    [Documentation]    Verify bearer 3 can be added to attached UE 5.
+    ...                Attach is required before any bearer operation, both steps
+    ...                are combined intentionally.
     [Tags]             bearer    positive
     Attach UE 5
     Add Bearer 3 To UE 5
-    Response Should Be Successful
+    Verify Bearer 3 Added To UE 5 Successfully
 
-
-TC-010 Reject Bearer ID 999 Out Of Range For UE 5
-    [Documentation]    Verify that bearer ID 999 out of range is rejected.
-    [Tags]             bearer    negative
+TC-010 Reject Bearer 999 As Out Of Range For UE 5
+    [Documentation]    Verify bearer ID 999 is outside the allowed range 1-9 and
+    ...                the error message references the valid boundary values.
+    [Tags]             bearer    negative    boundary
     Attach UE 5
     Add Bearer 999 To UE 5
-    Verify Error Message For Bearer ID Out Of Range
+    Verify Bearer ID Rejected As Out Of Range
 
-
-TC-011 Reject Duplicate Bearer 3 For UE 5
-    [Documentation]    Verify that adding the same bearer twice returns an error.
+TC-011 Reject Adding Duplicate Bearer 3 To UE 5
+    [Documentation]    Verify that adding bearer 3 a second time to UE 5
+    ...                returns a duplicate-bearer error.
     [Tags]             bearer    negative
     Attach UE 5
     Add Bearer 3 To UE 5
     Add Bearer 3 To UE 5
-    Verify Error Message Contains    already exists
+    Verify Bearer Addition Rejected As Duplicate
 
-
-TC-012 Retrieve Bearers Of Attached UE 5
-    [Documentation]    Verify that bearers of attached UE can be retrieved.
+TC-012 Retrieve Status For UE 5 With Active Bearer 3
+    [Documentation]    Verify the UE status endpoint returns success after bearer 3
+    ...                is added to UE 5.
     [Tags]             bearer    positive
     Attach UE 5
     Add Bearer 3 To UE 5
-    Retrieve Status Of UE 5
-    Response Should Be Successful
+    Retrieve UE 5 Status
+    Verify UE 5 Status Retrieved Successfully
 
-
-TC-013 Prevent Deletion Of Default Bearer 9 For UE 5
-    [Documentation]    Requirement: "Nie ma możliwości usunięcia domyślnego bearera".
-    [Tags]             compliance    negative
+TC-013 Reject Deletion Of Default Bearer 9 For UE 5
+    [Documentation]    Verify default bearer 9 cannot be removed from UE 5.
+    [Tags]             bearer    negative    compliance
     Attach UE 5
     Remove Bearer 9 From UE 5
-    Verify Error Message For Deleting Default Bearer
+    Verify Default Bearer Deletion Rejected
 
-
-TC-014 Reject Bearer ID 10 Outside Range For UE 5
-    [Documentation]    Requirement: "zakres bearerów dla UE: 1-9".
-    [Tags]             compliance    negative
+TC-014 Reject Bearer 10 As Out Of Range When Adding To UE 5
+    [Documentation]    Verify bearer ID 10 exceeds the upper boundary of range 1-9
+    ...                and is rejected with a range error.
+    [Tags]             bearer    negative    boundary
     Attach UE 5
-    # Bearer 10 is outside the documented range 1-9
     Add Bearer 10 To UE 5
-    Verify Error Message For Bearer ID Out Of Range
+    Verify Bearer ID Rejected As Out Of Range
 
-
-# TC demonstrating defect DEF-003
-TC-015 Reject Deletion of Bearer ID 10 Outside Range For UE 5
-    [Documentation]    Requirement: "zakres bearerów dla UE: 1-9" - bearer 10 is outside range.
+TC-015 Reject Deletion Of Bearer 10 As Out Of Range For UE 5
+    [Documentation]    DEF-002, Verify deleting bearer 10 (above upper boundary 9)
+    ...                returns a range error rather than a not-found error.
     [Tags]             bearer    negative    boundary
     Attach UE 5
     Remove Bearer 10 From UE 5
-    Verify Error Message For Bearer ID Out Of Range
+    Verify Bearer ID Rejected As Out Of Range
 
-TC-016 Successful Deletion Of Dedicated Bearer
-    [Documentation]    Verify successful removal of a dedicated bearer.
+TC-016 Remove Dedicated Bearer 3 From UE 5 Successfully
+    [Documentation]    Verify dedicated bearer 3 can be removed from UE 5.
+    ...                Default bearer 9 is unaffected.
     [Tags]             bearer    positive
     Attach UE 5
     Add Bearer 3 To UE 5
     Remove Bearer 3 From UE 5
-    Response Should Be Successful
+    Verify Bearer 3 Removed From UE 5 Successfully
 
-
-TC-017 Reject Deletion Of Inactive Bearer Within Range
-    [Documentation]    Verify that deleting an inactive bearer (but within range 1-9) returns "not found".
+TC-017 Reject Deletion Of Never-Added Bearer 3 For UE 5
+    [Documentation]    Verify that removing bearer 3 from UE 5 when it was never
+    ...                added returns a not-found error.
     [Tags]             bearer    negative
     Attach UE 5
     Remove Bearer 3 From UE 5
-    Verify Error Message Contains    Bearer not found
+    Verify Bearer Rejected As Not Found
 
+TC-018 Reject Adding Bearer 0 As Below Lower Boundary For UE 30
+    [Documentation]    Verify bearer ID 0 is below the allowed range 1-9
+    ...                and is rejected with a validation error referencing the minimum value.
+    [Tags]             bearer    negative    boundary
+    Attach UE 30
+    Add Bearer 0 To UE 30
+    Verify Bearer ID Rejected As Out Of Range

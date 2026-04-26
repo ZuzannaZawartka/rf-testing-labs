@@ -1,67 +1,63 @@
 *** Settings ***
+Documentation     UE attachment and detachment tests.
 Resource          ../resources/epc_keywords.resource
-Documentation     UE Attachment and Detachment tests based on documentation.
 Suite Setup       Initialize Simulator Session
-Suite Teardown    Reset Machine
-Test Teardown     Reset Machine
+Suite Teardown    Reset Simulator
+Test Teardown     Reset Simulator
 
 *** Test Cases ***
 
-TC-001 Attach UE 1 Successfully
-    [Documentation]    Requirement: Verify successful UE attachment.
-    [Tags]             positive    attach
+TC-001 Attach UE 1 To Network Successfully
+    [Documentation]    Verify UE 1 is registered and receives attached status.
+    [Tags]             attach    positive
     Attach UE 1
-    Verify UE 1 Is Attached Successfully
+    Verify UE 1 Attached Successfully
 
-TC-002 Reject UE ID 101 Out Of Range
-    [Documentation]    Verify that UE ID 101 is rejected by the system.
-    [Tags]             negative
+TC-002 Reject Attach For UE 101 As Out Of Range
+    [Documentation]    UE ID 101 exceeds the allowed range 0-100.
+    ...                Verify the error message references the valid boundary values.
+    [Tags]             attach    negative    boundary
     Attach UE 101
-    Verify Error Message For UE ID Out Of Range
+    Verify UE ID Rejected As Out Of Range
 
-TC-003 Reject Duplicate UE 1 Attachment
-    [Documentation]    Verify that attaching an already attached UE returns an error.
-    [Tags]             negative
+TC-003 Reject Second Attach For Already Attached UE 1
+    [Documentation]    Verify that attaching UE 1 while it is already registered
+    ...                returns a duplicate-attachment error.
+    [Tags]             attach    negative
     Attach UE 1
     Attach UE 1
-    Verify Error Message For Duplicate UE Attachment
+    Verify UE Attachment Rejected As Duplicate
 
-TC-004 Detach UE 1 Successfully
-    [Documentation]    Verify successful removal of UE from network.
-    [Tags]             positive    detach
+TC-004 Detach Attached UE 1 Successfully
+    [Documentation]    Verify UE 1 can be detached after a successful attach.
+    ...                Attach is a prerequisite for detach, both operations are
+    ...                combined to ensure correct state.
+    [Tags]             detach    positive
     Attach UE 1
     Detach UE 1
-    Verify UE 1 Is Detached Successfully
+    Verify UE 1 Detached Successfully
 
 TC-005 Reject Detach For Non-Existent UE 10
-    [Documentation]    Verify error when detaching a UE that is not in the system.
-    [Tags]             negative
+    [Documentation]    Verify that detaching UE 10 which was never attached
+    ...                returns a not-found error.
+    [Tags]             detach    negative
     Detach UE 10
-    Verify Error Message For Non-Existent UE
+    Verify UE Detachment Rejected As Not Found
 
-TC-006 Verify Default Bearer 9 Creation For UE 1
-    [Documentation]    Requirement: "Podłączony do sieci UE automatycznie otrzymuje domyślny bearer o ID 9".
-    [Tags]             compliance    positive
+TC-006 Verify Default Bearer 9 Created Automatically For UE 1
+    [Documentation]    Verify UE 1 receives default bearer 9 automatically on attach.
+    [Tags]             attach    positive    compliance
     Attach UE 1
-    Retrieve Status Of UE 1
-    # Verify ID 9 is present in the bearer list (implicit in traffic stats test)
-    Retrieve Traffic Stats For UE 1 On Bearer 9
-    Response Should Be Successful
+    Verify Default Bearer 9 Exists For UE 1
 
-# TC demonstrating defect DEF-002
-TC-007 Support UE ID Boundary 0
-    [Documentation]    Requirement: "zakres dostępnych UE: 0-100".
-    [Tags]             compliance    boundary    bug-discovery
+TC-007 Attach UE 0 At Lower Boundary Successfully
+    [Documentation]    DEF-001, Verify UE ID 0 (lower boundary of range 0-100) is accepted.
+    [Tags]             attach    positive    boundary
     Attach UE 0
-    Verify UE 0 Is Attached Successfully
+    Verify UE 0 Attached Successfully
 
-TC-008 Support UE ID Boundary 100
-    [Documentation]    Requirement: "zakres dostępnych UE: 0-100".
-    [Tags]             compliance    boundary
+TC-008 Attach UE 100 At Upper Boundary Successfully
+    [Documentation]    Verify UE ID 100 (upper boundary of range 0-100) is accepted.
+    [Tags]             attach    positive    boundary
     Attach UE 100
-    Verify UE 100 Is Attached Successfully
-
-
-
-
-
+    Verify UE 100 Attached Successfully
