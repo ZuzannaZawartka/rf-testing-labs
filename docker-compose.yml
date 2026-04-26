@@ -16,8 +16,9 @@ services:
         condition: service_healthy
     volumes:
       - ./tests:/tests
+      - ./resources:/resources
       - ./results:/results
     working_dir: /tests
     command: >
       sh -c "pip install robotframework robotframework-requests -q &&
-             robot --outputdir /results epc_tests.robot"
+             robot --outputdir /results ."
