@@ -28,3 +28,10 @@ def repo():
             os.unlink(db_path)
         except OSError:
             pass
+
+@pytest.fixture
+def repo_with_ue(repo):
+    from epc.api import attach_ue
+    from epc.models import AttachUERequest
+    attach_ue(body=AttachUERequest(ue_id=1), repo=repo)
+    return repo
